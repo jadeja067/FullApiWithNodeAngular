@@ -1,9 +1,12 @@
 <!-- source:https://codepen.io/owaiswiz/pen/jOPvEPB -->
 <div class="min-h-[100dvh] bg-gray-100 text-gray-900 flex justify-center overflow-hidden">
     <div class="flex justify-center items-center">
-        <div class="max-w-screen-xl p-0 bg-white shadow sm:rounded-lg flex justify-start flex-1 md:h-[90dvh] lg:w-[60vw] xl:w-[70vw] md:w-[90vw] h-screen w-screen overflow-hidden relative">
-            <div class="lg:w-[25vw] xl:w-[30vw] md:w-[90vw] flex justify-center items-center flex-col w-screen h-screen lg:p-16 xl:p-20 md:p-5 p-3 absolute top-0 left-0 transition-all duration-300 ease-in-out" [ngClass]="isSignIn ? 'opacity-100' : 'opacity-0'">
-                <div class="w-100 justify-center items-center p-8 transition-all duration-700 flex">
+        <div
+            class="max-w-screen-xl p-0 bg-white shadow sm:rounded-lg flex justify-start flex-1 md:h-[90dvh] lg:w-[60vw] xl:w-[70vw] md:w-[90vw] h-screen w-screen overflow-hidden relative">
+            <div class="lg:w-[25vw] xl:w-[30vw] md:w-[90vw] flex justify-center items-center flex-col w-screen h-screen lg:p-16 xl:p-20 md:p-5 p-3 absolute top-0 left-0 transition-all duration-300 ease-in-out"
+                [ngClass]="[isSignIn ? 'opacity-100' : 'opacity-0']">
+                <div class="w-100 justify-center items-center p-8 transition-all duration-700 flex"
+                    [ngClass]="isEmail > 0? 'hidden' : 'flex'">
                     <h1 class="xl:text-5xl sm:text-4xl font-bold cursor-pointer">
                         <span class="hover:text-indigo-500">Q</span><span class="hover:text-indigo-500">u</span><span
                             class="hover:text-indigo-500">a</span><span class="hover:text-indigo-500">n</span><span
@@ -16,7 +19,7 @@
                 <div class="flex-col flex items-center transition-all duration-700 ">
                     <div class="w-full flex-1">
                         <div class="flex flex-col items-center">
-                            <button
+                            <button [ngClass]="isEmail > 0? 'hidden' : 'flex'"
                                 class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                                 <div class="bg-white p-2 rounded-full">
                                     <svg class="w-4" viewBox="0 0 533.5 544.3">
@@ -41,14 +44,15 @@
 
                         </div>
 
-                        <div class="py-8 text-center">
+                        <div class="py-8 text-center" [ngClass]="isEmail > 0  ? 'hidden' : 'block'">
                             <div class="flex justify-center rounded bg-slate-200 items-center">
                                 <hr class="text-black bg-black w-100 h-[2px]" />
                             </div>
                         </div>
 
                         <div class="mx-auto max-w-xs ">
-                            <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+                            <form [formGroup]="signInForm" (ngSubmit)="signIn()"
+                                [ngClass]="isEmail > 0? 'hidden' : 'block'">
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                     type="email" id="email" placeholder="Email" formControlName="email"
@@ -56,8 +60,13 @@
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                                     type="password" id="password" placeholder="Password" formControlName="password" />
+                                <div class="p-2 flex justify-start items-center">
+                                    <a (click)="toggleIsEmail()" class="text-indigo-500 cursor-pointer">
+                                        forgot password ?
+                                    </a>
+                                </div>
                                 <button type="submit" [disabled]="!signInForm.valid"
-                                    class="mt-5 tracking-wide font-semibold disabled:bg-indigo-800 disabled:text-gray-500 text-white bg-indigo-500 text-white-500 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                                    class="tracking-wide font-semibold disabled:bg-indigo-800 disabled:text-gray-500 text-white bg-indigo-500 text-white-500 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                                     <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -69,19 +78,82 @@
                                     </span>
                                 </button>
                             </form>
-                            <div class="flex justify-center items-center gap-2 text-sm text-gray-500 p-4 ">
-                                <p>Don't have account ?</p><button (click)="toggleSignIn()">Sign Up</button>
-                            </div>
+                            <form [formGroup]="forgotTimeEmailForm" (ngSubmit)="sendMail()"
+                                class="justify-center items-center flex-col gap-5 w-100 h-100"
+                                [ngClass]="isEmail === 1 ? 'flex' : 'hidden'">
+                                <div class="w-full py-2 flex justify-start items-start">
+                                    <button (click)="back()" class="flex justify-center items-center gap-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                        </svg><span>Back</span>
+                                    </button>
+                                </div>
+                                <h1 class="text-4xl text-left font-bold">Send OTP</h1>
+                                <input
+                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    type="email" id="forgotEmail" placeholder="email" formControlName="email" />
+                                <input
+                                    class="tracking-wide font-semibold disabled:bg-indigo-800 disabled:text-gray-500 text-white bg-indigo-500 text-white-500 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                                    type="submit" value="Send Mail" [disabled]="!forgotTimeEmailForm.valid">
+                            </form>
+                            <form [formGroup]="forgotPasswordForm" (ngSubmit)="changePassword()"
+                                class="justify-center items-center flex-col gap-5 w-100 h-100"
+                                [ngClass]="isEmail === 2 ? 'flex' : 'hidden'">
+                                <div class="w-full py-2 flex justify-start items-start">
+                                    <button (click)="back()" class="flex justify-center items-center gap-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                        </svg><span>Back</span>
+                                    </button>
+                                </div>
+                                <h1 class="text-4xl text-left font-bold">Enter OTP</h1>
+                                <input
+                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    type="password" id="otp" placeholder="OTP" formControlName="OTP" />
+                                <input
+                                    class="tracking-wide font-semibold disabled:bg-indigo-800 disabled:text-gray-500 text-white bg-indigo-500 text-white-500 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                                    type="submit" value="Conform" [disabled]="!forgotPasswordForm.valid">
+                            </form>
+                            <form [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()"
+                                class="justify-center items-center flex-col gap-5 w-100 h-100"
+                                [ngClass]="isEmail === 3  ? 'flex' : 'hidden'">
+                                <div class="w-full py-2 flex justify-start items-start">
+                                    <button (click)="back()" class="flex justify-center items-center gap-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                        </svg><span>Back</span>
+                                    </button>
+                                </div>
+                                <h1 class="text-4xl text-left font-bold">update Password</h1>
+                                <input
+                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    type="password" id="upadtepassword" placeholder="password" formControlName="password" />
+                                <input
+                                    class="tracking-wide font-semibold disabled:bg-indigo-800 disabled:text-gray-500 text-white bg-indigo-500 text-white-500 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                                    type="submit" value="Change Password" [disabled]="!changePasswordForm.valid">
+                            </form>
+                        </div>
+                        <div class="flex justify-center items-center gap-2 text-sm text-gray-500 p-2 "
+                            [ngClass]="isEmail > 0? 'hidden' : 'flex'">
+                            <p>Don't have account ?</p><button (click)="toggleSignIn()">Sign Up</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flex-1 bg-indigo-100 text-center hidden lg:flex absolute top-0 bottom-0 transition-all duration-500 right-0 ease-in-out" [ngClass]="!isSignIn ? '-translate-x-[70%]' : 'translate-x-0'" style="z-index: 2; ">
+            <div class="flex-1 bg-indigo-100 text-center hidden lg:flex absolute top-0 bottom-0 transition-all duration-500 right-0 ease-in-out"
+                [ngClass]="!isSignIn ? '-translate-x-[70%]' : 'translate-x-0'" style="z-index: 2; ">
                 <div class="lg:w-[35vw] m-12 img-fluid xl:w-[35vw] bg-contain bg-center bg-no-repeat"
                     style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');">
                 </div>
             </div>
-            <div class="lg:min-w-[25vw] xl:w-[30vw] md:min-w-[90vw] min-w-screen lg:p-2 md:p-5 p-3 absolute top-0 right-0 transition-all duration-300 ease-in-out" [ngClass]="!isSignIn ? 'opacity-100 right-0 md:translate-x-0 -translate-x-[35%]' : 'opacity-0 md:right-0 right-[100%]'">
+            <div class="lg:min-w-[25vw] xl:w-[30vw] md:min-w-[90vw] min-w-screen lg:p-2 md:p-5 p-3 absolute top-0 right-0 transition-all duration-300 ease-in-out"
+                [ngClass]="!isSignIn ? 'opacity-100 right-0 md:translate-x-0 -translate-x-[35%]' : 'opacity-0 md:right-0 right-[100%]'">
                 <div class="w-100 flex justify-center items-center p-8 transition-all duration-300">
                     <h1 class="xl:text-5xl sm:text-4xl font-bold cursor-pointer">
                         <span class="hover:text-indigo-500">Q</span><span class="hover:text-indigo-500">u</span><span
@@ -92,7 +164,7 @@
                             class="hover:text-indigo-500">s</span>
                     </h1>
                 </div>
-                <div class="flex-col items-center flex" >
+                <div class="flex-col items-center flex">
                     <div class="w-full flex-1">
                         <div class="flex flex-col items-center">
                             <button
@@ -127,7 +199,8 @@
                         </div>
 
                         <div class="mx-auto max-w-xs ">
-                            <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="flex justify-center items-center gap-3 flex-col">
+                            <form [formGroup]="signUpForm" (ngSubmit)="signUp()"
+                                class="flex justify-center items-center gap-3 flex-col">
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                     type="text" id="username" placeholder="username" formControlName="username"

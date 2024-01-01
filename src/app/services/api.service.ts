@@ -2,16 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) { }
-  signUp(body: any){
-    this.http.post('http://localhost:7000/user/signup', body).subscribe((data) => data)
+  url: string = 'http://localhost:7000';
+  constructor(private http: HttpClient) {}
+  async signUp(body: any) {
+    const response = await this.http
+      .post(`${this.url}/user/signup`, body)
+      .toPromise();
+    return response;
   }
-  async signIn(body: any){
-    let response = {}
-    this.http.post('http://localhost:7000/user/signin', body).subscribe((data) =>  response = data)
-    return await response
+  async signIn(body: any) {
+    const response = await this.http
+      .post(`${this.url}/user/signin`, body)
+      .toPromise();
+    return response;
+  }
+  async sendMail(body: any) {
+    const response = await this.http
+      .post(`${this.url}/user/sendmail`, body)
+      .toPromise();
+    return response;
   }
 }
