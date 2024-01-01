@@ -1,0 +1,40 @@
+{
+  "name": "quantumgoods",
+  "version": "1.0.0",
+  "description": "This is the backend for QuantumGoods using NodeJS, ExpressJS and MogoDB.",
+  "main": "index.js",
+  "scripts": {
+    "test": "dont test",
+    "start": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jadeja067/FullApiWithNodeAngular.git"
+  },
+  "keywords": [
+    "QuatumGoods",
+    "amazon",
+    "flipcard",
+    "myntra",
+    "alibaba",
+    "ne1wears",
+    "meesho",
+    "online",
+    "shopping"
+  ],
+  "author": "Kuldipsinh Jadeja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jadeja067/FullApiWithNodeAngular/issues"
+  },
+  "homepage": "https://github.com/jadeja067/FullApiWithNodeAngular#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "googleapis": "^129.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "nodemailer": "^6.9.7",
+    "nodemon": "^3.0.2"
+  }
+}

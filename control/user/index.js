@@ -1,0 +1,99 @@
+const usermodal = require("../../schems/user"),
+  userschema = usermodal.userschema,
+  nodemailer = require("nodemailer"),
+  { google } = require("googleapis"),
+  OAuth2 = google.auth.OAuth2,
+  oauth2Client = new OAuth2(
+    "54483711494-n1o0gbouug9qqtectts3u4tmkb865osk.apps.googleusercontent.com",
+    "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",
+    "https://developers.google.com/oauthplayground"
+  );
+oauth2Client.setCredentials({
+  refresh_token:
+    "1//04QV3zkUuyFyrCgYIARAAGAQSNwF-L9IrLcGzgfXW3ARQcW-NOMMaF3oCsI5pEr7acA5VgBWH9S13acXNRgQY5X91QXuZ8rNnBuo",
+});
+const accessToken = oauth2Client.getAccessToken(),
+  transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user: "quantumgoods.shopping@gmail.com",
+      clientId:
+        "576279600249-a59lck3322shafgj5eum33ota326lkkd.apps.googleusercontent.com",
+      clientSecret: "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",
+      refreshToken:
+        "1//04HvdFt8PfcEsCgYIARAAGAQSNwF-L9IrcBMZLYcyV96ISUR0G1_8x7wy92QNUkIZghQ7aGTD5yUCn2Bl02MoCB0feonKeIyuI38",
+      accessToken: accessToken,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  }),
+  mailOptions = {
+    from: "quantumgoods.shopping@gmail.com",
+    to: "",
+    subject: "OTP from QuntumGoods",
+    text: "",
+  };
+
+const send = () => {
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+};
+
+exports.sendMail = async (req, res) => {
+  try {
+    const find = await userschema.findOne({email: req.body.email})
+    if(find){
+      const OTP = Math.floor(Math.random() * 10000);
+      mailOptions.to = await req.body.email;
+      mailOptions.text = `Your OTP is ${OTP}`;
+      send();
+      res.json({ OTP: OTP }).status(200)
+    }else{
+      res.json({error: "this email doesn't exist."}).status(404)
+    }
+  } catch (e) {
+    res.json(e);
+  }
+};
+
+exports.changePassword = async (req, res) => {
+  try {
+    const user = await userschema.updateOne(
+      { email: req.body.email },
+      { $set: { password: req.body.password }}
+    );
+    console.log()
+    res.json(user).status(200)
+  } catch (e) {
+    res.json(e);
+  }
+};
+
+exports.singin = async (req, res) => {
+  try {
+    const user = await userschema.findOne({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    if (user) res.json({ found: 1 }).status(200);
+    else res.json({ found: 0 }).status(404);
+  } catch (e) {
+    res.json(e);
+  }
+};
+exports.singup = async (req, res) => {
+  try {
+    const user = new userschema(req.body);
+    await user.save();
+    res.json(user).status(200);
+  } catch (e) {
+    res.json(e);
+  }
+};
