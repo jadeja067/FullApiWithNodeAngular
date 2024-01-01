@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/signin.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -52,7 +52,10 @@ export class SigninComponent {
   }
   async signUp() {
     const response = await this.service.signUp(this.signUpForm.value);
-    console.log(response);
+    if(response){
+      console.log(response);
+    }else alert("User already exists. please sign in.")
+    
   }
   async signIn() {
     const response = await this.service.signIn(this.signInForm.value);
@@ -62,6 +65,7 @@ export class SigninComponent {
   async sendMail() {
     this.OTP = await this.service.sendMail(this.forgotTimeEmailForm.value);    
     if(this.OTP.OTP) this.toggleIsEmail();
+    else alert("This E-mail address doesn't exist.")
   }
 
   toggleIsEmail() {
@@ -72,6 +76,8 @@ export class SigninComponent {
     if(this.OTP.OTP.toString() == this.forgotPasswordForm.value.OTP){
       this.toggleIsEmail();
       console.log(this.forgotPasswordForm.value);
+    }else{
+      alert("something gone wrong. Try again please...")
     }
   }
   updatePassword() {
