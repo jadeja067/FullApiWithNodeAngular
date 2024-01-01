@@ -14,6 +14,7 @@ export class SigninComponent {
   changePasswordForm!: FormGroup;
   isSignIn: boolean = true;
   isEmail: number = 0;
+  OTP!: any
   constructor(private form: FormBuilder, private service: ApiService) {
     this.signInForm = form.group({
       email: ['', [Validators.email, Validators.required]],
@@ -60,23 +61,23 @@ export class SigninComponent {
 
   async sendMail() {
     this.toggleIsEmail();
-    // await this.service.sendMail(this.forgotTimeEmailForm.value);
+    this.OTP = await this.service.sendMail(this.forgotTimeEmailForm.value);    
   }
 
   toggleIsEmail() {
-    if (this.isEmail < 3 && this.isEmail > -1) this.isEmail+=1;
+    if (this.isEmail < 3 && this.isEmail > -1) this.isEmail++;
   }
 
-  changePassword() {
-    this.toggleIsEmail();
-    console.log(this.isEmail);
-
-    // console.log(this.forgotPasswordForm.value);
+  changePassword() {    
+    if(this.OTP.OTP.toString() == this.forgotPasswordForm.value.OTP){
+      this.toggleIsEmail();
+      console.log(this.forgotPasswordForm.value);
+    }
   }
   updatePassword() {
-    console.log(this.isEmail);
+    this.service.updatePassword(this.changePasswordForm)
   }
   back() {
-    this.isEmail = 0
+    this.isEmail = 0    
   }
 }
