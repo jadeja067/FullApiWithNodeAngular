@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
 @Component({
   selector: 'app-signin',
@@ -15,15 +16,15 @@ export class SigninComponent {
   isSignIn: boolean = true;
   isEmail: number = 0;
   OTP!: any
-  constructor(private form: FormBuilder, private service: ApiService) {
-    this.signInForm = form.group({
+  constructor(private form: FormBuilder, private service: ApiService, private router: Router) {
+    this.signInForm = this.form.group({
       email: ['', [Validators.email, Validators.required]],
       password: [
         '',
         [Validators.minLength(4), Validators.maxLength(8), Validators.required],
       ],
     });
-    this.signUpForm = form.group({
+    this.signUpForm = this.form.group({
       username: ['', [Validators.minLength(4), Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       password: [
@@ -31,16 +32,16 @@ export class SigninComponent {
         [Validators.minLength(4), Validators.maxLength(8), Validators.required],
       ],
     });
-    this.forgotTimeEmailForm = form.group({
+    this.forgotTimeEmailForm = this.form.group({
       email: ['', [Validators.email, Validators.required]],
     });
-    this.forgotPasswordForm = form.group({
+    this.forgotPasswordForm = this.form.group({
       OTP: [
         '',
         [Validators.required, Validators.maxLength(4), Validators.minLength(4)],
       ],
     });
-    this.changePasswordForm = form.group({
+    this.changePasswordForm = this.form.group({
       password: [
         '',
         [Validators.required, Validators.maxLength(4), Validators.minLength(4)],
@@ -52,14 +53,13 @@ export class SigninComponent {
   }
   async signUp() {
     const response = await this.service.signUp(this.signUpForm.value);
-    if(response){
-      console.log(response);
-    }else alert("User already exists. please sign in.")
+    if(response) this.isSignIn = true
+    else alert("User already exists. please sign in.")
     
   }
   async signIn() {
     const response = await this.service.signIn(this.signInForm.value);
-    console.log(response);
+    if(response) this.router.navigate(['/dashboard'])
   }
 
   async sendMail() {
@@ -76,9 +76,7 @@ export class SigninComponent {
     if(this.OTP.OTP.toString() == this.forgotPasswordForm.value.OTP){
       this.toggleIsEmail();
       console.log(this.forgotPasswordForm.value);
-    }else{
-      alert("something gone wrong. Try again please...")
-    }
+    }else alert("something gone wrong. Try again please...")
   }
   updatePassword() {
     this.service.updatePassword({password : this.changePasswordForm.value.password, email: this.forgotTimeEmailForm.value.email})
