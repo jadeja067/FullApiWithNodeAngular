@@ -1,2 +1,7 @@
 <app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div class="flex h-[75dvh] p-2 box-border">
+    <app-sidebar></app-sidebar>
+    <div class="p-2 bg-red-100 h-[87vh] overflow-x-auto w-full">
+        <router-outlet></router-outlet>
+    </div>
+</div>

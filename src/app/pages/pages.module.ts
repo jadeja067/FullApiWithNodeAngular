@@ -5,7 +5,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { NavbarComponent} from "./components/navbar/navbar.component";
 import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './contact/contact.component'
+import { ContactComponent } from './contact/contact.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component'
 
 const routes: Routes =[
   {path: '', component: DashboardComponent, children:[
@@ -21,7 +22,8 @@ const routes: Routes =[
     AboutComponent,
     NavbarComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
