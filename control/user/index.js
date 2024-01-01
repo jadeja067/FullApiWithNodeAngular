@@ -83,16 +83,19 @@ exports.singin = async (req, res) => {
       password: req.body.password,
     });
     if (user) res.json({ found: 1 }).status(200);
-    else res.json({ found: 0 }).status(404);
+    else res.json(null).status(404);
   } catch (e) {
     res.json(e);
   }
 };
 exports.singup = async (req, res) => {
   try {
-    const user = new userschema(req.body);
-    await user.save();
-    res.json(user).status(200);
+    const find = await userschema.findOne({email: req.body.email})
+    if(!find){
+      const user = new userschema(req.body);
+      await user.save();
+      res.json(user).status(200);
+    }else res.json(null)
   } catch (e) {
     res.json(e);
   }
