@@ -1,13 +1,13 @@
 <!-- source:https://codepen.io/owaiswiz/pen/jOPvEPB -->
-<div class="min-h-[100dvh] bg-gray-100 text-gray-900 flex justify-center overflow-hidden">
+<div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center overflow-hidden">
     <div class="flex justify-center items-center">
         <div
-            class="max-w-screen-xl p-0 bg-white shadow sm:rounded-lg flex justify-start flex-1 md:h-[90dvh] lg:w-[60vw] xl:w-[70vw] md:w-[90vw] h-screen w-screen overflow-hidden relative">
-            <div class="lg:w-[25vw] xl:w-[30vw] md:w-[90vw] flex justify-center items-center flex-col w-screen h-screen lg:p-16 xl:p-20 md:p-5 p-3 absolute top-0 left-0 transition-all duration-300 ease-in-out"
+            class="max-w-screen-xl p-0 bg-white shadow sm:rounded-lg flex justify-start flex-1 md:h-[90vh] lg:w-[70vw] xl:w-[70vw] md:w-[90vw] h-screen w-screen overflow-hidden relative">
+            <div class="lg:w-[30vw] md:w-[90vw] flex justify-center items-center flex-col w-screen h-screen lg:p-4 xl:p-20 md:p-5 p-3 absolute top-0 left-0 transition-all duration-300 ease-in-out"
                 [ngClass]="[isSignIn ? 'opacity-100' : 'opacity-0']">
-                <div class="w-100 justify-center items-center p-8 transition-all duration-700 flex"
+                <div class="w-100 justify-center items-center xl:p-8 lg:p-4 p-3 transition-all duration-700 flex"
                     [ngClass]="isEmail === 0 ? 'flex' : 'hidden'">
-                    <h1 class="xl:text-5xl sm:text-4xl font-bold cursor-pointer">
+                    <h1 class="xl:text-5xl sm:text-4xl text-3xl font-bold cursor-pointer">
                         <span class="hover:text-indigo-500">Q</span><span class="hover:text-indigo-500">u</span><span
                             class="hover:text-indigo-500">a</span><span class="hover:text-indigo-500">n</span><span
                             class="hover:text-indigo-500">t</span><span class="hover:text-indigo-500">m</span><span
@@ -44,13 +44,13 @@
 
                         </div>
 
-                        <div class="py-8 text-center" [ngClass]="isEmail === 0  ? 'flex' : 'hidden'">
+                        <div class="xl:py-8 lg:py-4 py-2 text-center" [ngClass]="isEmail === 0  ? 'flex' : 'hidden'">
                             <div class="flex justify-center rounded bg-slate-200 items-center">
                                 <hr class="text-black bg-black w-100 h-[2px]" />
                             </div>
                         </div>
 
-                        <div class="mx-auto max-w-xs ">
+                        <div class="mx-auto xl:max-w-xs ">
                             <form [formGroup]="signInForm" (ngSubmit)="signIn()"
                                 [ngClass]="isEmail === 0 ? 'block' : 'hidden'">
                                 <input
@@ -149,14 +149,14 @@
             </div>
             <div class="flex-1 bg-indigo-100 text-center hidden lg:flex absolute top-0 bottom-0 transition-all duration-500 right-0 ease-in-out"
                 [ngClass]="!isSignIn ? '-translate-x-[70%]' : 'translate-x-0'" style="z-index: 2; ">
-                <div class="lg:w-[35vw] m-12 img-fluid xl:w-[35vw] bg-contain bg-center bg-no-repeat"
+                <div class="lg:w-[35vw] m-12 img-fluid bg-contain bg-center bg-no-repeat"
                     style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');">
                 </div>
             </div>
-            <div class="lg:min-w-[25vw] xl:w-[30vw] md:min-w-[90vw] min-w-screen lg:p-2 md:p-5 p-3 absolute top-0 right-0 transition-all duration-300 ease-in-out"
+            <div class="lg:w-[30vw] md:w-[90vw] w-screen lg:p-2 md:p-5 p-3 absolute top-0 right-0 transition-all duration-300 ease-in-out"
                 [ngClass]="!isSignIn ? 'opacity-100 right-0 md:translate-x-0 -translate-x-[35%]' : 'opacity-0 md:right-0 right-[100%]'">
-                <div class="w-100 flex justify-center items-center p-8 transition-all duration-300">
-                    <h1 class="xl:text-5xl sm:text-4xl font-bold cursor-pointer">
+                <div class="w-100 flex justify-center items-center xl:p-8 p-4 transition-all duration-300">
+                    <h1 class="xl:text-5xl sm:text-3xl font-bold cursor-pointer">
                         <span class="hover:text-indigo-500">Q</span><span class="hover:text-indigo-500">u</span><span
                             class="hover:text-indigo-500">a</span><span class="hover:text-indigo-500">n</span><span
                             class="hover:text-indigo-500">t</span><span class="hover:text-indigo-500">m</span><span
@@ -193,7 +193,7 @@
 
                         </div>
 
-                        <div class="py-8 text-center">
+                        <div class="xl:py-8 py-4 text-center">
                             <div class="flex justify-center rounded bg-slate-200 items-center">
                                 <hr class="text-black bg-black w-100 h-[2px]" />
                             </div>
@@ -221,7 +221,7 @@
                                         <circle cx="8.5" cy="7" r="4" />
                                         <path d="M20 8v6M23 11h-6" />
                                     </svg>
-                                    <span class="ml-3">
+                                    <span class="xl:ml-3 ml-1">
                                         Sign In
                                     </span>
                                 </button>
