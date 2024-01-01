@@ -27,7 +27,7 @@ export class ApiService {
   }
   async updatePassword(body: any) {
     const response = await this.http
-      .post(`${this.url}/user/changePassword`, body)
+      .patch(`${this.url}/user/changePassword`, body)
       .toPromise();
     return response;
   }

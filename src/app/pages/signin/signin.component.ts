@@ -60,8 +60,8 @@ export class SigninComponent {
   }
 
   async sendMail() {
-    this.toggleIsEmail();
     this.OTP = await this.service.sendMail(this.forgotTimeEmailForm.value);    
+    if(this.OTP.OTP) this.toggleIsEmail();
   }
 
   toggleIsEmail() {
@@ -75,7 +75,7 @@ export class SigninComponent {
     }
   }
   updatePassword() {
-    this.service.updatePassword(this.changePasswordForm)
+    this.service.updatePassword({password : this.changePasswordForm.value.password, email: this.forgotTimeEmailForm.value.email})
   }
   back() {
     this.isEmail = 0    
