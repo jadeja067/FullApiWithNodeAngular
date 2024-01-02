@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ApiService {
   url: string = 'http://localhost:7000';
+  sideBar: boolean = false
   constructor(private http: HttpClient) {}
   async signUp(body: any) {
     const response = await this.http
