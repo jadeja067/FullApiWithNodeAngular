@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const users = require("../../control/user");
+
 router
   .post("/signin", users.singin)
   .post("/signup", users.singup)

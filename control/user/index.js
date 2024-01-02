@@ -1,4 +1,5 @@
 const usermodal = require("../../schems/user"),
+  jwt = require('jsonwebtoken'),
   userschema = usermodal.userschema,
   nodemailer = require("nodemailer"),
   { google } = require("googleapis"),
@@ -45,6 +46,7 @@ const send = () => {
     }
   });
 };
+const generateToken = (data) => jwt.sign(data, process.env.JWT_SECRET_KEY); 
 
 exports.sendMail = async (req, res) => {
   try {
@@ -82,7 +84,10 @@ exports.singin = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    if (user) res.json({ found: 1 }).status(200);
+    if (user) {
+      const Token = generateToken(req.body)
+      res.json({ found: 1, token: Token}).status(200);
+    }
     else res.json(null).status(404);
   } catch (e) {
     res.json(e);
