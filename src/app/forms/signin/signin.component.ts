@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/services/signin.service';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
 })
-export class SigninComponent {
+export class SigninComponent implements OnInit{
   signInForm!: FormGroup;
   signUpForm!: FormGroup;
   forgotTimeEmailForm!: FormGroup;
@@ -48,6 +48,11 @@ export class SigninComponent {
       ],
     });
   }
+  ngOnInit(): void {
+    if(localStorage.getItem("auth")){
+      this.router.navigate(['/dashboard'])
+    }
+  }
   toggleSignIn() {
     this.isSignIn = !this.isSignIn;
   }
@@ -59,9 +64,14 @@ export class SigninComponent {
   }
   async signIn() {
     const response = await this.service.signIn(this.signInForm.value);
-    if(response) this.router.navigate(['/dashboard'])
+    if(response){
+      this.setAuth(response)
+      this.router.navigate(['/dashboard'])
+    }
   }
-
+  setAuth(res: any){
+    localStorage.setItem('auth', res.token)
+  }
   async sendMail() {
     this.OTP = await this.service.sendMail(this.forgotTimeEmailForm.value);    
     if(this.OTP.OTP) this.toggleIsEmail();
