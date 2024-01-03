@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
-<div class="flex h-[75dvh] px-2 box-border">
-    <app-sidebar class="md:block md:static absolute left-0 top-0 bottom-0 z-40" [ngClass]="!sideBar ? 'hidden' :'block'"></app-sidebar>
-    <div class="p-2 h-[89vh] overflow-x-auto w-full ">
+<div class="flex justify-start items-start h-[75dvh] px-2 box-border">
+    <app-sidebar class="md:translate-x-0 md:static z-40 transition-transform duration-300 ease-in-out h-full" [ngClass]="!sideBar ? '-translate-x-full absolute' :'translate-x-0'"></app-sidebar>
+    <div class="p-2 h-[89vh] overflow-x-auto w-full float-start">
         <router-outlet></router-outlet>
     </div>
 </div>
