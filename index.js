@@ -11,7 +11,7 @@ app.use(cors())
 dotenv.config(); 
 
 // connection to DB
-mongoose.connect('mongodb://localhost:27017/quantumgoods').then(() => {
+mongoose.connect(process.env.CONNECTION_STRING).then(() => {
     // Port Running if connected
     app.listen(process.env.PORT, () => console.log("listening... at 7000"));
 }).catch((e) => console.log(e))
