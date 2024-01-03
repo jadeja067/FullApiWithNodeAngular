@@ -7,5 +7,8 @@ import { ApiService } from 'src/app/services/signin.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  
+  constructor(private service:ApiService){}
+  toggle(){
+    this.service.sideBar.next(false)
+  }
 }

@@ -14,9 +14,7 @@ export class DashboardComponent implements OnInit{
     if(!localStorage.getItem("auth")){
       this.router.navigate(['/sign'])
     }
-    this.service.sideBar.subscribe((data: boolean) => {
-      this.sideBar = data
-      console.log(data)
-    })
+    this.service.sideBar.subscribe((Data: any) => this.sideBar = Data);
+
   }
 }

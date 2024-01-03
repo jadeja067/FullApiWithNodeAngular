@@ -8,14 +8,12 @@ import { ApiService } from 'src/app/services/signin.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  toggleSideBarBool: boolean = false
   constructor(private router: Router, private service: ApiService){}
   signOut(){
     localStorage.removeItem("auth")
     this.router.navigate(['/sign'])
   }
-  toggleSideBar(){
-    this.toggleSideBarBool = !this.toggleSideBarBool
-    this.service.sideBar.next(this.toggleSideBarBool)
+  toggle(){
+    this.service.sideBar.next(true)
   }
 }
