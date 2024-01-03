@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   url: string = 'http://localhost:7000';
-  sideBar: boolean = false
+  sideBar: any = new Subject();
   constructor(private http: HttpClient) {}
   async signUp(body: any) {
     const response = await this.http
