@@ -1,0 +1,23 @@
+.product_image:hover::before{
+    position: absolute;
+    content: 'CHANGE IMAGE';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgb(0, 0,0, 0.6);
+}
+option{
+    color: black
+}
+option.placeholder{
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+    padding: 5rem !important;
+}

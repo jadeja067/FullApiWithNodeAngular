@@ -1,0 +1,49 @@
+<div class="py-5 h-full box-border relative">
+    <h2 class="text-4xl font-bold text-center py-4">Add Product</h2>
+    <div class="flex items-start pt-7 justify-center md:gap-6 gap-1 h-100">
+        <form class="flex items-start md:justify-around justify-start p-3 w-full h-100" [formGroup]="addProductForm" (ngSubmit)="addNew()">
+            <div (click)="uploadImage(file_input)"
+                class="flex justify-center product_image items-center h-80 rounded-md after:rounded-md overflow-hidden transition-all flex-col relative">
+                <img class="w-52 rounded-md h-full"
+                    [src]="imageSrc"
+                    alt="product image" />
+                <input type="file" formControlName="img" id="img" #file_input class="hidden file" />
+            </div>
+            <div class="md:w-[60%] w-full">
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="text" formControlName="name" id="floating_email"
+                        class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder="" />
+                    <label for="floating_email"
+                        class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Product
+                        Name</label>
+                </div>
+                <div class="relative z-0 w-full mb-5 group">
+                    <textarea formControlName="description" id="description" rows="4"
+                        class="block py-2.5 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder=" "></textarea>
+                    <label for="floating_password"
+                        class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
+                </div>
+                <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-5 group">
+                        <select formControlName="category" id="category"
+                            class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 text-gray-500 dark:text-gray-400">
+                            <option value="" class="placeholder">category</option>
+                            <option value="d" class="text-black">computer</option>
+                        </select>
+                    </div>
+                    <div class="relative z-0 w-full mb-5 group">
+                        <select formControlName="subCategory" id="sub-category"
+                            class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 text-gray-500 dark:text-gray-400">
+                            <option value="" class="placeholder">sub-category</option>
+                            <option value="d">mouse</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

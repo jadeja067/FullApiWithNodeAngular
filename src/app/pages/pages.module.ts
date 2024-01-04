@@ -13,6 +13,7 @@ const routes: Routes =[
     {path:"", component: HomeComponent},
     {path:"about", component: AboutComponent},
     {path:"contact", component: ContactComponent},
+    {path: "add-product", loadChildren: () => import('./components/add-product/add-product.module').then(mod => mod.AddProductModule)}
   ]}
 ]
 
