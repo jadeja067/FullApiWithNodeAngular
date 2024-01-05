@@ -12,7 +12,7 @@ const upload = multer({ storage: storage });
 exports.addProducts = async (req, res) => {
   console.log(req.body)
   try {
-    upload.single('image')
+    // upload.single('image')
     const newProduct = new productSchema(req.body[0]);
     newProduct.save();
     res.json(newProduct).status(200);
