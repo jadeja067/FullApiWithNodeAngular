@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require('cors');
 const mongoose  = require('mongoose')
-const users = require('./routes/users')
 const dotenv = require('dotenv'); 
+const users = require('./routes/users/index')
+const product = require('./routes/product/index')
 const app = express();
 
 // MaddleWare
@@ -19,5 +20,8 @@ mongoose.connect(process.env.CONNECTION_STRING).then(() => {
 
 // User routes
 app.use('/user', users.router)
+
+// Product routes
+app.use('/product', product.router)
 
 
