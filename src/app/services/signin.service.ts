@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class ApiService {
   url: string = 'http://localhost:7000';
   sideBar: any = new Subject();
+  imageFile = new FormData()
   constructor(private http: HttpClient) {}
   async signUp(body: any) {
     const response = await this.http
@@ -32,5 +33,18 @@ export class ApiService {
       .patch(`${this.url}/user/changePassword`, body)
       .toPromise();
     return response;
+  }
+  async addProduct(body: any) {
+    this.imageFile.set('image', body[1])
+    const response = await this.http.post(`${this.url}/product/addProduct`, [body[0], this.imageFile]).toPromise()
+    return response
+  }
+  async getProducts() {
+    const response = await this.http.get(`${this.url}/product/getProducts`).toPromise()
+    return response
+  }
+  async getProduct(id: string) {
+    const response = await this.http.get(`${this.url}/product/getProduct/${id}`).toPromise()
+    return response
   }
 }

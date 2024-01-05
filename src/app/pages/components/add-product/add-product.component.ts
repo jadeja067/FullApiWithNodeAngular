@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/signin.service';
 
 @Component({
   selector: 'app-add-product',
@@ -9,9 +10,10 @@ import { Router } from '@angular/router';
 })
 export class AddProductComponent {
   addProductForm: FormGroup;
+  file!:any 
   imageSrc: string =
     'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220';
-  constructor(private form: FormBuilder, private router: Router) {
+  constructor(private form: FormBuilder, private router: Router, private service: ApiService) {
     this.addProductForm = this.form.group({
       img: ['', [Validators.required]],
       name: ['', [Validators.required, Validators.minLength(4)]],
@@ -25,8 +27,8 @@ export class AddProductComponent {
     file_input.onchange = (event: any) => {
       const reader = new FileReader();
       const allowedMimeType = ['image/png', 'image/jpg', 'image/jpeg'];
-      const file = event.target.files[0];
-      if (file && allowedMimeType.includes(event.target.files[0].type)) {
+      this.file = event.target.files[0];
+      if (this.file && allowedMimeType.includes(event.target.files[0].type)) {
         reader.readAsDataURL(event.target.files[0]);
         reader.onload = (e: any) => {
           this.imageSrc = e.target.result;
@@ -34,7 +36,7 @@ export class AddProductComponent {
       }
     };
   }
-  addNew() {
-    console.log(this.addProductForm.value);
+  async addNew() {
+    const res = await this.service.addProduct([this.addProductForm.value, this.file])    
   }
 }
