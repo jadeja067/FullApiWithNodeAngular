@@ -3,7 +3,6 @@ const { Schema, default: mongoose } = require('mongoose')
 const product = new Schema({
     img: {
         type: String,
-        required: true
     },
     name: {
         type: String,
