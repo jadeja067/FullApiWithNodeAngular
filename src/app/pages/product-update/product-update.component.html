@@ -1,12 +1,12 @@
 <div class="py-5 h-full box-border relative">
     <h2 class="text-4xl font-bold text-center py-4">Add Product</h2>
     <div class="flex items-start pt-7 justify-center md:gap-6 gap-1 h-100">
-        <form class="flex items-start md:justify-around justify-start p-3 w-full h-100" [formGroup]="addProductForm"
-            (ngSubmit)="addNew()">
+        <form class="flex items-start md:justify-around justify-start p-3 w-full h-100" [formGroup]="updateForm"
+            (ngSubmit)="update()">
             <div (click)="uploadImage(file_input)"
                 class="flex justify-center product_image items-center h-80 rounded-md after:rounded-md overflow-hidden transition-all flex-col relative">
-                <img class="w-52 rounded-md h-full" [src]="imageSrc" alt="product image" />
-                <input type="file" formControlName="img" id="img" #file_input class="hidden file" />
+                <img class="w-52 rounded-md h-full" [src]="imgUrl" alt="product image" />
+                <input type="file" name="img" id="img" #file_input class="hidden file" />
             </div>
             <div class="md:w-[60%] w-full">
                 <div class="relative z-0 w-full mb-5 group">
@@ -42,7 +42,7 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" [disabled]="addProductForm.invalid"
+                <button type="submit" [disabled]="updateForm.invalid"
                     class="text-white bg-blue-700 hover:bg-blue-800 disabled:text-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
             </div>
         </form>

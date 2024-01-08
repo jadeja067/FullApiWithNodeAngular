@@ -45,4 +45,8 @@ export class ApiService {
     const response = await this.http.get(`${this.url}/product/getProduct/${id}`).toPromise()
     return response
   }
+  async updateProduct(id: string, body: any) {
+    const response = await this.http.patch(`${this.url}/product/updateProduct/${id}`, body).toPromise()
+    return response
+  }
 }

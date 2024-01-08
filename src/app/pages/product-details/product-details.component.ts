@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/services/signin.service';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent {
-  product_id!: string
+  product_id: string
   productDetails!: any
   img: string = "https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220"
 
