@@ -2,7 +2,7 @@
     [ngClass]="!productDetails ? 'space-y-8 animate-pulse md:space-y-0 md:space-x-8': ''">
     <div class="flex gap-8 items-center justify-center h-full w-[60%] rounded-lg overflow-hidden">
         <div class="h-full w-[50%]">
-            <img src={{img}} class="h-full rounded-lg" alt="product image" *ngIf="productDetails">
+            <img src={{productDetails.img}} class="h-full rounded-lg" alt="product image" *ngIf="productDetails">
             <svg class="w-full h-full text-gray-200" *ngIf="!productDetails" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -51,7 +51,7 @@
                 <div *ngIf="productDetails" class="h-[10%]">
                     <h2 class="text-3xl font-bold">{{productDetails.name}}</h2>
                 </div>
-                <div class="h-[80%] overflow-y-auto" >
+                <div *ngIf="productDetails" class="h-[80%] overflow-y-auto" >
                     <p>{{productDetails.description}}</p>
                 </div>
                 <div class="h-[10%] flex items-center justify-center">

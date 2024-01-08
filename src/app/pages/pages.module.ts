@@ -7,7 +7,7 @@ import { NavbarComponent} from "./components/navbar/navbar.component";
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { ProductDetailsComponent } from './components/product-details/product-details.component'
+import { ProductDetailsComponent } from './product-details/product-details.component'
 
 const routes: Routes =[
   {path: '', component: DashboardComponent, children:[
@@ -15,7 +15,7 @@ const routes: Routes =[
     {path:"about", component: AboutComponent},
     {path:"contact", component: ContactComponent},
     {path: "add-product", loadChildren: () => import('./components/add-product/add-product.module').then(mod => mod.AddProductModule)},
-    {path: "product-details/:id", loadChildren: () => import('./components/product-details/product-details.module').then(mod => mod.ProductDetailsModule)},
+    {path: "product-details/:id", loadChildren: () => import('./product-details/product-details.module').then(mod => mod.ProductDetailsModule)},
 
   ]}
 ]
