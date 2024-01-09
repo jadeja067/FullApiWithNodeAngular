@@ -66,6 +66,16 @@ exports.updateProductDetails = (req, res, next) => {
     middleware(req, res, imageController);
 };
 
+exports.deleteProduct = async (req, res) => {
+  try {
+    const id = req.params.id
+    const deleteProduct = await productSchema.findOneAndDelete({_id: id})
+    res.json(deleteProduct).status(200) 
+  } catch (error) {
+    res.json(error)
+  }
+}
+
 exports.getProducts = async (req, res) => {
   try {
     const Products = await productSchema.find();

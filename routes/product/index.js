@@ -6,6 +6,7 @@ router
   .post("/addProduct", product.addProducts)
   .get("/getProducts", product.getProducts)
   .get("/getProduct/:id", product.getProduct)
-  .patch('/updateProduct/:id', product.updateProductDetails)
+  .patch("/updateProduct/:id", product.updateProductDetails)
+  .delete('/removeProduct/:id', product.deleteProduct);
 
 exports.router = router;
