@@ -16,4 +16,7 @@ export class HomeComponent implements OnInit{
   async getProducts(){
     this.products = await this.service.getProducts()
   }
+  async remove(id: string){
+    await this.service.removeProduct(id)
+  }
 }

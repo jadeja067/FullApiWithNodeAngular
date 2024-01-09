@@ -49,4 +49,8 @@ export class ApiService {
     const response = await this.http.patch(`${this.url}/product/updateProduct/${id}`, body).toPromise()
     return response
   }
+  async removeProduct(id: string) {
+    const response = await this.http.delete(`${this.url}/product/removeProduct/${id}`).toPromise()
+    return response
+  }
 }

@@ -13,6 +13,7 @@ export class ProductUpdateComponent {
   updateForm: any;
   productDetails!: any;
   imgUrl!: string;
+  loading: any = false
   constructor(
     private form: FormBuilder,
     private router: Router,
@@ -24,6 +25,7 @@ export class ProductUpdateComponent {
       description: ['', [Validators.required, Validators.minLength(20)]],
       category: ['', [Validators.required]],
       subCategory: ['', [Validators.required]],
+      price: ['', [Validators.required]],
       image: null,
     });
     this.getProductDetails();
@@ -49,18 +51,24 @@ export class ProductUpdateComponent {
     Object.keys(this.updateForm.value).forEach((e: any) => this.updateForm.controls[e].patchValue(response[e] || null));
     this.imgUrl = response['img'];
   }
-  update() {
+  async update() {
+    let res:any = []
+    this.loading = true
     if (this.updateForm.value.image) {
       const data = new FormData();
       Object.keys(this.updateForm.value).forEach((d) =>
         data.append(d, this.updateForm.value[d])
       );
       console.log(this.updateForm.value);
-      this.service.updateProduct(this.product_id, data);
+      res = await this.service.updateProduct(this.product_id, data);
     } else {
       this.productDetails = this.updateForm.value
       delete this.productDetails.img;
-      this.service.updateProduct(this.product_id, this.productDetails);
+      res = await this.service.updateProduct(this.product_id, this.productDetails);
     }
+    if(res){
+      this.loading = false
+      alert("Product Updated Successfully.")
+    } 
   }
 }

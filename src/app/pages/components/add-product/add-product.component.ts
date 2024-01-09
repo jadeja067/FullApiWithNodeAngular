@@ -12,6 +12,7 @@ export class AddProductComponent {
   addProductForm: FormGroup;
   imageSrc: string =
     'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220';
+  loading: any = false
   constructor(private form: FormBuilder, private router: Router, private service: ApiService) {
     this.addProductForm = this.form.group({
       img: ['', [Validators.required]],
@@ -19,6 +20,7 @@ export class AddProductComponent {
       description: ['', [Validators.required, Validators.minLength(20)]],
       category: ['', [Validators.required]],
       subCategory: ['', [Validators.required]],
+      price: ['', [Validators.required]],
       image: null
     });
   }
@@ -38,9 +40,14 @@ export class AddProductComponent {
     };
   }
   async addNew() {
+    this.loading = true
     const payload = new FormData()
     const data = Object.keys(this.addProductForm.value)
     data.forEach((d) => payload.append(d, this.addProductForm.value[d]))
     const res = await this.service.addProduct(payload)    
+    if(res){
+      this.loading = false
+      alert("New Product Is Added.")
+    } 
   }
 }
