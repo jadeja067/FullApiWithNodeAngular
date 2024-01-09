@@ -24,7 +24,7 @@
                     <label for="floating_password"
                         class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
                 </div>
-                <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="flex items-center gap-4 md:gap-6">
                     <div class="relative z-0 w-full mb-5 group">
                         <select formControlName="category" id="category"
                             class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 text-gray-500 dark:text-gray-400">
@@ -41,6 +41,7 @@
                             <option value="tree" class="text-black">tree</option>
                         </select>
                     </div>
+                    <span class="border-2 text-3xl border-gray-300 px-4 py-1 font-light text-gray-500 mb-5" (click)="open()">+</span>
                 </div>
                 <div class="relative z-0 w-full mb-5 group">
                     <input type="tel" formControlName="price" id="price"
@@ -69,4 +70,5 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
+    <ng-container [ngComponentOutlet]="Addcate"></ng-container>
 </div>

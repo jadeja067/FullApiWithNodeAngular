@@ -5,7 +5,7 @@
             (ngSubmit)="update()">
             <div (click)="uploadImage(file_input)"
                 class="flex justify-center product_image items-center h-80 rounded-md after:rounded-md overflow-hidden transition-all flex-col relative">
-                <img class="w-52 rounded-md h-full" [src]="imgUrl" alt="product image" />
+                <img class="w-52 rounded-md h-full" [src]="imgUrl" alt="product image" loading="lazy"/>
                 <input type="file" name="img" id="img" #file_input class="hidden file" />
             </div>
             <div class="md:w-[60%] w-full">

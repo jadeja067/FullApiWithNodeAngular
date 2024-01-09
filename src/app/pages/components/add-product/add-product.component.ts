@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
-
+import { AddCategoryComponent } from '../add-category/add-category.component';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/services/signin.service';
 })
 export class AddProductComponent {
   addProductForm: FormGroup;
+  Addcate!: any  
   imageSrc: string =
     'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220';
   loading: any = false
@@ -23,6 +24,9 @@ export class AddProductComponent {
       price: ['', [Validators.required]],
       image: null
     });
+    this.service.addCate.subscribe((data: boolean) => {
+      this.Addcate = !data ? null : AddCategoryComponent
+    })
   }
   uploadImage(file_input: any) {
     file_input.click();
@@ -49,5 +53,8 @@ export class AddProductComponent {
       this.loading = false
       alert("New Product Is Added.")
     } 
+  }
+  open(){
+    this.service.addCate.next(true)
   }
 }

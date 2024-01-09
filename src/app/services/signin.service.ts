@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class ApiService {
   url: string = 'http://localhost:7000';
   sideBar: any = new Subject();
+  addCate: any = new Subject();
   constructor(private http: HttpClient) {}
   async signUp(body: any) {
     const response = await this.http
