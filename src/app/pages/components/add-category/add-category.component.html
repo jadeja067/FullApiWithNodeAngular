@@ -1,5 +1,30 @@
-<div class="absolute flex justify-center items-center top-0 right-0 bottom-0 left-0 z-20 bg-gray-700/80">
-    <div class="bg-white w-72 h-80 shadow">
-        <button (click)="close()">close</button>
+<div class="absolute flex justify-center items-center top-0 right-0 bottom-0 left-0 z-2 bg-gray-700/80">
+    <div class="bg-white w-[40%] h-[50%] shadow">
+        <div class="flex p-2 justify-center items-center select-none relative py-2 border-b-2">
+            <h2 class="w-full text-center text-2xl font-semibold">Add Custom Category</h2>
+            
+        </div>
+        <div class="flex flex-col gap-4 justify-center items-center h-[82%] relative">
+            <form [formGroup]="cateForm" (ngSubmit)="addCategory()" class="w-[70%] flex flex-col gap-4 justify-start items-center h-[70%] ">
+                <div class="relative z-0 w-full group">
+                    <input type="text" formControlName="Category" id="Category"
+                    class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder="" />
+                    <label for="Category"
+                    class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Category</label>
+                </div>
+                <div class="relative z-0 w-full group">
+                    <input type="text" formControlName="SubCategoty" id="Sub-category"
+                    class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder="" />
+                    <label for="Sub-category"
+                    class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sub-category</label>
+                </div>
+                <div class="w-full absolute bottom-0 left-0 right-0 border-t-2 flex">
+                    <button class="min-w-[50%] w-[50%] max-w-[50%] border-r-2 hover:bg-gray-100 disabled:text-gray-400 font-medium sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+                    <span class="min-w-[50%] w-[50%] max-w-[50%] block hover:bg-gray-100 disabled:text-gray-400 font-medium sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer" (click)="close()">close</span>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

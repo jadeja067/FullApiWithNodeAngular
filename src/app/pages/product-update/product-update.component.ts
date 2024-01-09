@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
+import { AddCategoryComponent } from '../components/add-category/add-category.component';
 
 @Component({
   selector: 'app-product-update',
@@ -14,6 +15,7 @@ export class ProductUpdateComponent {
   productDetails!: any;
   imgUrl!: string;
   loading: any = false
+  Addcate: any;
   constructor(
     private form: FormBuilder,
     private router: Router,
@@ -29,6 +31,9 @@ export class ProductUpdateComponent {
       image: null,
     });
     this.getProductDetails();
+    this.service.addCate.subscribe((data: boolean) => {
+      this.Addcate = !data ? null : AddCategoryComponent
+    })
   }
   uploadImage(file_input: any) {
     file_input.click();
@@ -70,5 +75,8 @@ export class ProductUpdateComponent {
       this.loading = false
       alert("Product Updated Successfully.")
     } 
+  }
+  open(){
+    this.service.addCate.next(true)
   }
 }
