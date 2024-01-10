@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
@@ -9,13 +9,15 @@ import { AddCategoryComponent } from '../add-category/add-category.component';
   templateUrl: './product-update.component.html',
   styleUrls: ['./product-update.component.css'],
 })
-export class ProductUpdateComponent {
+export class ProductUpdateComponent implements OnInit{
   product_id: string;
   updateForm: any;
   productDetails!: any;
   imgUrl!: string;
   loading: any = false
   Addcate: any;
+  sub_categories: any;
+  categories: any;
   constructor(
     private form: FormBuilder,
     private router: Router,
@@ -34,6 +36,11 @@ export class ProductUpdateComponent {
     this.service.addCate.subscribe((data: boolean) => {
       this.Addcate = !data ? null : AddCategoryComponent
     })
+    this.service.getCategories().subscribe((data: any) => this.categories = data);
+
+  }
+  ngOnInit(): void {
+    this.updateForm.controls['category'].valueChanges.subscribe((data: any) => this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
   }
   uploadImage(file_input: any) {
     file_input.click();

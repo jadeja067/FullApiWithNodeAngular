@@ -1,5 +1,5 @@
 <p class="py-3 text-3xl font-bold">Nature</p>
-<div class="w-100 p-2 h-100 flex gap-2 overflow-x-scroll ">
+<div class="w-100 p-2 h-100 flex gap-2 overflow-x-scroll" *ngIf="products">
     <a routerLink="product-details/{{product._id}}" *ngFor="let product of products"
         class="inline-block md:w-60 md:h-72 w-56 h-64 bg-white border relative border-gray-200 rounded-lg shadow overflow-hidden dark:bg-gray-800 dark:border-gray-700">
         <div class="h-full product_image">
@@ -14,4 +14,15 @@
             </div>
         </div>
     </a>
+</div>
+<div class="w-100 p-2 h-100 flex gap-2 overflow-x-scroll" *ngIf="!products">
+    <div *ngFor="let load of loading"
+        class="inline-block md:w-60 md:min-w-60 md:h-72 md:min-h-72 w-56 min-w-56 h-64 min-h-64  bg-white rounded-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700">
+        <div class="h-full w-full animate-pulse">
+            <!-- <div class="md:w-60 md:h-72 w-56 h-64 bg-slate-200"></div> -->
+            <svg class="w-full h-full text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="1 7 17 10">
+                <path d="M18 0H2a5 2 0 0 0-2 9v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z"/>
+            </svg>
+        </div>
+    </div>
 </div>

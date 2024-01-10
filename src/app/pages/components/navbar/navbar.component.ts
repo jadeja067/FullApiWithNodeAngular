@@ -13,7 +13,7 @@ export class NavbarComponent {
   sideBar:boolean = false
   constructor(private router: Router, private service: ApiService){}
   signOut(){
-    localStorage.removeItem("auth")
+    localStorage.clear()    
     this.router.navigate(['/sign'])
   }
   toggle(){

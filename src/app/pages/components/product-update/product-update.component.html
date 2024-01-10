@@ -28,20 +28,16 @@
                     <div class="relative z-0 w-full mb-5 group">
                         <select formControlName="category" id="category"
                             class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 dark:text-gray-400">
-                            <option value="" class="placeholder">category</option>
-                            <option value="computer" class="text-black">computer</option>
-                            <option value="nature" class="text-black">nature</option>
+                            <option *ngFor="let cate of categories" value={{cate.category}} [selected]="cate.category == productDetails.category"class="text-black">{{cate.category}}</option>
                         </select>
                     </div>
                     <div class="relative z-0 w-full mb-5 group">
                         <select formControlName="subCategory" id="sub-category"
                             class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 dark:text-gray-400">
-                            <option value="" class="placeholder">sub-category</option>
-                            <option value="mouse" class="text-black">mouse</option>
-                            <option value="tree" class="text-black">tree</option>
+                            <option *ngFor="let subC of sub_categories" value={{subC.subCategory}} [selected]="subC.subCategory == productDetails.subCategory" class="text-black">{{subC.subCategory}}</option>
                         </select>
                     </div>
-                    <span class="cursor-pointer border-b-2 text-3xl border-gray-300 px-4 py-0.5 font-light text-gray-500 mb-5 focus:text-blue-600 focus:border-blue-600" (click)="open()">+</span>
+                    <span title="Add custome category" class="cursor-pointer border-b-2 text-3xl border-gray-300 px-4 py-0.5 font-light text-gray-500 mb-5 focus:text-blue-600 focus:border-blue-600" (click)="open()">+</span>
                 </div>
                 <div class="relative z-0 w-full mb-5 group">
                     <input type="text" formControlName="price" id="price"
@@ -51,7 +47,7 @@
                         class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price</label>
                 </div>
                 <button type="submit" [disabled]="updateForm.invalid"
-                    class="text-white bg-blue-700 hover:bg-blue-800 disabled:text-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium md:rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                    class="text-white bg-blue-700 hover:bg-blue-800 disabled:text-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium md:rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
             </div>
         </form>
     </div>

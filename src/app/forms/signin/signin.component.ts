@@ -23,6 +23,7 @@ export class SigninComponent implements OnInit{
         '',
         [Validators.minLength(4), Validators.maxLength(8), Validators.required],
       ],
+      user: localStorage?.getItem("auth")
     });
     this.signUpForm = this.form.group({
       username: ['', [Validators.minLength(4), Validators.required]],
@@ -49,9 +50,8 @@ export class SigninComponent implements OnInit{
     });
   }
   ngOnInit(): void {
-    if(localStorage.getItem("auth")){
+    if(localStorage.getItem("auth") && localStorage.getItem("user"))
       this.router.navigate(['/dashboard'])
-    }
   }
   toggleSignIn() {
     this.isSignIn = !this.isSignIn;
@@ -71,6 +71,8 @@ export class SigninComponent implements OnInit{
   }
   setAuth(res: any){
     localStorage.setItem('auth', res.token)
+    localStorage.setItem('user', res.user)
+
   }
   async sendMail() {
     this.OTP = await this.service.sendMail(this.forgotTimeEmailForm.value);    

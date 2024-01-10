@@ -11,7 +11,8 @@ export class DashboardComponent implements OnInit{
   sideBar: boolean = false
   constructor(private router: Router, private service: ApiService){}
   ngOnInit(): void {
-    if(!localStorage.getItem("auth")){
+    const auth = localStorage.getItem("auth"), user = localStorage.getItem("user")
+    if(!auth || !user && auth != "undifined"){
       this.router.navigate(['/sign'])
     }
     this.service.sideBar.subscribe((Data: any) => this.sideBar = Data);

@@ -8,8 +8,10 @@ import { ApiService } from 'src/app/services/signin.service';
 })
 export class HomeComponent implements OnInit{
   products!: any
+  loading: Number[] = [0, 1, 2, 3, 4, 5]
   img: string = "https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220"
   constructor(private service: ApiService){}
+
   ngOnInit(): void {
     this.getProducts()
   }

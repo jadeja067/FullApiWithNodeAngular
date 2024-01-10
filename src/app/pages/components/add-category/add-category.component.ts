@@ -23,8 +23,6 @@ export class AddCategoryComponent {
     this.service.addCate.next(false)
   }
   async addCategory(){
-    console.log(this.cateForm.value);
-    const res = await this.service.addCategory(this.cateForm.value)
-    console.log(res)
+    await this.service.addCategory(this.cateForm.value)
   }
 }

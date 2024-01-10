@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
@@ -8,9 +8,11 @@ import { AddCategoryComponent } from '../add-category/add-category.component';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css'],
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit{
   addProductForm: FormGroup;
   Addcate!: any  
+  categories: any
+  sub_categories: any
   imageSrc: string =
     'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220';
   loading: any = false
@@ -22,11 +24,16 @@ export class AddProductComponent {
       category: ['', [Validators.required]],
       subCategory: ['', [Validators.required]],
       price: ['', [Validators.required]],
+      user: localStorage.getItem('user'),
       image: null
     });
     this.service.addCate.subscribe((data: boolean) => {
       this.Addcate = !data ? null : AddCategoryComponent
     })
+    this.service.getCategories().subscribe((data: any) => this.categories = data);
+  }
+  ngOnInit(): void {
+    this.addProductForm.controls['category'].valueChanges.subscribe((data: any) => this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
   }
   uploadImage(file_input: any) {
     file_input.click();

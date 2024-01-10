@@ -58,4 +58,13 @@ export class ApiService {
     const response = await this.http.post(`${this.url}/category/add-category`, body).toPromise()
     return response
   }
+  getCategoy(name: string) {
+    return this.http.get(`${this.url}/category/categories/name/${name}`)
+  }
+  getCategories() {
+    return this.http.get(`${this.url}/category/categories`)
+  }
+  getSubCategories(id: string) {
+    return this.http.get(`${this.url}/category/sub-categories/${id}`)
+  }
 }
