@@ -4,6 +4,7 @@ const mongoose  = require('mongoose')
 const dotenv = require('dotenv'); 
 const users = require('./routes/users/index')
 const product = require('./routes/product/index')
+const category = require('./routes/category/category')
 const app = express();
 
 // MaddleWare
@@ -23,5 +24,8 @@ app.use('/user', users.router)
 
 // Product routes
 app.use('/product', product.router)
+
+// Category routes
+app.use('/category', category.routes)
 
 

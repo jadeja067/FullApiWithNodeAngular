@@ -2,7 +2,7 @@ const {Schema, default: mongoose} = require('mongoose')
 
 const CateSchema = new Schema({
     category: {
-        type: string,
+        type: String,
         required: true
     }
 })
