@@ -1,6 +1,5 @@
-const usermodal = require("../../schems/user"),
+const { userschema } = require("../schemas/index"),
   jwt = require('jsonwebtoken'),
-  userschema = usermodal.userschema,
   nodemailer = require("nodemailer"),
   { google } = require("googleapis"),
   OAuth2 = google.auth.OAuth2,
@@ -80,19 +79,31 @@ exports.changePassword = async (req, res) => {
 
 exports.singin = async (req, res) => {
   try {
-    const user = await userschema.findOne({
-      email: req.body.email,
-      password: req.body.password,
-    });
+    const user = await userschema.findOne(req.body);
     if (user) {
       const Token = generateToken(req.body)
-      res.json({ found: 1, token: Token}).status(200);
+      res.json({ found: 1, token: Token, user: user._id}).status(200);
     }
     else res.json(null).status(404);
   } catch (e) {
     res.json(e);
   }
 };
+
+exports.verify = async (req, res) => {
+  const verifing = jwt.verify(req.body.token, process.env.JWT_SECRET_KEY)
+  try {
+    const user = await userschema.findOne({
+      email: verifing.email,
+      password: verifing.password
+    });
+    if (user) res.json(1).status(200)
+    else res.json(0).status(400)
+  } catch (e) {
+    res.json(e);
+  }
+};
+
 exports.singup = async (req, res) => {
   try {
     const find = await userschema.findOne({email: req.body.email})

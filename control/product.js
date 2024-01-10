@@ -1,5 +1,4 @@
-const model = require("../../schems/product/index");
-const productSchema = model.productSchema;
+const { productSchema } = require("../schemas/index");
 const multer = require("multer");
 const fs = require("fs");
 let fileName = "";
@@ -22,6 +21,8 @@ const uploadToCloud = async (path) => {
   const result = await cloudinary.uploader.upload(path);
   return result;
 };
+const user = require("./user");
+
 exports.addProducts = async (req, res, next) => {
   let Add = async () => {
     try {
@@ -61,20 +62,20 @@ exports.updateProductDetails = (req, res, next) => {
       fs.unlinkSync(req.file.path);
       req.body.img = result.url;
       controller();
-    }else controller()
+    } else controller();
   };
-    middleware(req, res, imageController);
+  middleware(req, res, imageController);
 };
 
 exports.deleteProduct = async (req, res) => {
   try {
-    const id = req.params.id
-    const deleteProduct = await productSchema.findOneAndDelete({_id: id})
-    res.json(deleteProduct).status(200) 
+    const id = req.params.id;
+    const deleteProduct = await productSchema.findOneAndDelete({ _id: id });
+    res.json(deleteProduct).status(200);
   } catch (error) {
-    res.json(error)
+    res.json(error);
   }
-}
+};
 
 exports.getProducts = async (req, res) => {
   try {
@@ -89,6 +90,16 @@ exports.getProduct = async (req, res) => {
   try {
     const Product = await productSchema.findOne({ _id: req.params.id });
     res.json(Product).status(200);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
+exports.something = async (req, res) => {
+  try {
+    const verifing = await user.verify(req, res);
+    console.log(verifing);
+    res.json(verifing)
   } catch (error) {
     res.json(error);
   }

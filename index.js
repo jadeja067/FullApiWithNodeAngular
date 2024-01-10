@@ -2,9 +2,9 @@ const express = require("express");
 const cors = require('cors');
 const mongoose  = require('mongoose')
 const dotenv = require('dotenv'); 
-const users = require('./routes/users/index')
-const product = require('./routes/product/index')
-const category = require('./routes/category/category')
+const users = require('./routes/user')
+const product = require('./routes/product')
+const category = require('./routes/category')
 const app = express();
 
 // MaddleWare

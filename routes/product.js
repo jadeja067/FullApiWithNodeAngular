@@ -1,4 +1,4 @@
-const product = require("../../control/product/index");
+const product = require("../control/product");
 const express = require("express");
 const router = express.Router();
 
@@ -7,6 +7,6 @@ router
   .get("/getProducts", product.getProducts)
   .get("/getProduct/:id", product.getProduct)
   .patch("/updateProduct/:id", product.updateProductDetails)
-  .delete('/removeProduct/:id', product.deleteProduct);
+  .delete('/removeProduct/:id', product.deleteProduct).get('/some', product.something)
 
 exports.router = router;
