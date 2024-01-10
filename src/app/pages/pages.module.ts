@@ -16,7 +16,7 @@ const routes: Routes =[
     {path:"contact", component: ContactComponent},
     {path: "add-product", loadChildren: () => import('./components/add-product/add-product.module').then(mod => mod.AddProductModule)},
     {path: "product-details/:id", loadChildren: () => import('./product-details/product-details.module').then(mod => mod.ProductDetailsModule)},
-    {path: "product-update/:id", loadChildren: () => import('./product-update/product-update.module').then(mod => mod.ProductUpdateModule)}
+    {path: "product-update/:id", loadChildren: () => import('./components/product-update/product-update.module').then(mod => mod.ProductUpdateModule)}
   ]}
 ]
 

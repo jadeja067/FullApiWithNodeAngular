@@ -16,13 +16,15 @@ export class AddCategoryComponent {
   constructor(private service: ApiService, private form: FormBuilder){
     this.cateForm = this.form.group({
       Category: ['', [Validators.required]],
-      SubCategoty: ['', [Validators.required]]
+      SubCategory: ['', [Validators.required]]
     })
   }
   close(){
     this.service.addCate.next(false)
   }
-  addCategory(){
+  async addCategory(){
     console.log(this.cateForm.value);
+    const res = await this.service.addCategory(this.cateForm.value)
+    console.log(res)
   }
 }

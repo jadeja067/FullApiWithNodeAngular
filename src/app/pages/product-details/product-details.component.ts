@@ -20,4 +20,8 @@ export class ProductDetailsComponent {
     const response = await this.service.getProduct(this.product_id)
     this.productDetails = response    
   }
+  async remove(id: string){
+    await this.service.removeProduct(id)
+    this.router.navigate(['/dashboard'])
+  }
 }

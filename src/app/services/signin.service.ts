@@ -54,4 +54,8 @@ export class ApiService {
     const response = await this.http.delete(`${this.url}/product/removeProduct/${id}`).toPromise()
     return response
   }
+  async addCategory(body: any) {
+    const response = await this.http.post(`${this.url}/category/add-category`, body).toPromise()
+    return response
+  }
 }

@@ -1,0 +1,15 @@
+.product_details{
+    background: linear-gradient(rgba(0,0,0,0) 2%, rgba(0,0,0));
+}
+.product_image:hover .product_details{
+    opacity: 1;
+}
+.content{
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all .5s ease-in-out;
+}
+.product_image:hover .content{
+    transform: translateY(0rem);
+    opacity: 1;
+}

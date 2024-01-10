@@ -57,9 +57,14 @@
                 <div *ngIf="productDetails" class="h-[80%] overflow-y-auto" >
                     <p>{{productDetails.description}}</p>
                 </div>
-                <div class="h-100 flex items-center justify-end">
-                    <a routerLink="/dashboard/product-update/{{product_id}}" class="rounded-lg bg-blue-700 text-white py-2 px-5">Edit</a>
+                <div *ngIf="productDetails" class="h-100 overflow-y-auto" >
+                    <p class="text-2xl font-semibold"><span>Price : </span>${{productDetails.price}}</p>
                 </div>
+                <div class="h-100 flex items-center justify-end gap-4">
+                    <a routerLink="/dashboard/product-update/{{product_id}}" class="rounded-lg bg-blue-700 text-white py-2 px-5">Edit</a>
+                    <button class="rounded-lg bg-blue-700 text-white py-2 px-5" (click)="remove(productDetails._id)">Delete</button>
+                </div>
+                
             </div>
         </div>
     </div>

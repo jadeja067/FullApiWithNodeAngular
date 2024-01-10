@@ -52,6 +52,8 @@ export class AddProductComponent {
     if(res){
       this.loading = false
       alert("New Product Is Added.")
+      this.addProductForm.reset()
+      this.imageSrc = 'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220'
     } 
   }
   open(){
