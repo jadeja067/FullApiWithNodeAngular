@@ -1,6 +1,6 @@
-<div class="py-5 md:h-full h-[90vh] overflow-y-auto box-border relative">
+<div class="py-5 h-full box-border relative">
     <h2 class="md:text-4xl text-2xl font-bold text-center md:py-4 py-0">Update Product</h2>
-    <div class="flex items-start md:pt-7 pt-2 justify-center md:gap-6 gap-1 md:h-100 h-screen overflow-y-auto">
+    <div class="flex items-start md:pt-7 pt-2 justify-center md:gap-6 gap-1 h-100">
         <form class="flex md:flex-row flex-col items-start md:justify-around justify-start p-3 md:gap-0 gap-4 w-full h-100" [formGroup]="updateForm"
             (ngSubmit)="update()">
             <div (click)="uploadImage(file_input)"
