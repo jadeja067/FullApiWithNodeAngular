@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
@@ -9,14 +9,14 @@ import { AddCategoryComponent } from '../add-category/add-category.component';
   templateUrl: './product-update.component.html',
   styleUrls: ['./product-update.component.css'],
 })
-export class ProductUpdateComponent implements OnInit{
+export class ProductUpdateComponent implements OnInit, OnDestroy{
   product_id: string;
   updateForm: any;
   productDetails!: any;
-  imgUrl!: string;
+  imgUrl?: string;
   loading: any = false
   Addcate: any;
-  sub_categories: any;
+  sub_categories: any; // ? ! difference
   categories: any;
   constructor(
     private form: FormBuilder,
@@ -36,7 +36,11 @@ export class ProductUpdateComponent implements OnInit{
     this.service.addCate.subscribe((data: boolean) => {
       this.Addcate = !data ? null : AddCategoryComponent
     })
-    this.service.getCategories().subscribe((data: any) => this.categories = data);
+    this.service.getCategories()
+    this.service.categories.subscribe((data: any) => {
+      console.log(data)
+      this.categories = data
+    });
 
   }
   ngOnInit(): void {
@@ -85,5 +89,10 @@ export class ProductUpdateComponent implements OnInit{
   }
   open(){
     this.service.addCate.next(true)
+  }
+  ngOnDestroy(): void {
+    this.service.addCate.unsubscribe()
+    this.updateForm.controls['category'].valueChanges.unsubscribe()
+    // this.service.getCategories().unsubscribe()
   }
 }

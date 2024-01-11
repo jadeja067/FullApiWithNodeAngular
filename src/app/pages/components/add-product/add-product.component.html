@@ -1,4 +1,4 @@
-<div class="py-5 h-full box-border relative">
+<div class="py-5 min-h-100 h-full box-border relative">
     <h2 class="md:text-4xl text-2xl font-bold text-center md:py-4 py-0">Add Product</h2>
     <div class="flex items-start md:pt-7 pt-2 justify-center md:gap-6 gap-1 h-100">
         <form class="flex items-start md:flex-row flex-col md:justify-around md:gap-0 gap-4 justify-start p-3 w-full h-100" [formGroup]="addProductForm"
@@ -28,14 +28,18 @@
                     <div class="relative z-0 w-full mb-5 group">
                         <select formControlName="category" id="category"
                             class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 dark:text-gray-400">
-                            <option *ngFor="let cate of categories" value={{cate.category}} class="text-black">{{cate.category}}</option>
+                            <option *ngFor="let cate of categories" value={{cate.category}} id="cate" class="text-black">{{cate.category}}</option>
                         </select>
+                        <label for="category" id="catelab"
+                        class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform top-3 left-2 z-50 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Category</label>
                     </div>
                     <div class="relative z-0 w-full mb-5 group" >
                         <select formControlName="subCategory" id="sub-category" 
                             class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 dark:text-gray-400">
-                            <option *ngFor="let subC of sub_categories" value={{subC.subCategory}} class="text-black">{{subC.subCategory}}</option>
+                            <option *ngFor="let subC of sub_categories" value={{subC.subCategory}} id="subcate" class="text-black">{{subC.subCategory}}</option>
                         </select>
+                        <!-- <label for="sub-category" id="catelab"
+                        class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform top-3 left-2 z-50 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sub category</label> -->
                     </div>
                     <span title="Add custome category" class="cursor-pointer border-b-2 text-3xl border-gray-300 px-4 py-0.5 font-light text-gray-500 mb-5 focus:text-blue-600 focus:border-blue-600" (click)="open()">+</span>
                 </div>
@@ -43,8 +47,8 @@
                     <input type="tel" formControlName="price" id="price"
                         class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder="" />
-                    <label for="price"
-                        class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price</label>
+                    <!-- <label for="price"
+                        class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price</label> -->
                 </div>
                 <button type="submit" [disabled]="addProductForm.invalid"
                     class="text-white bg-blue-700 hover:bg-blue-800 disabled:text-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium md:rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>

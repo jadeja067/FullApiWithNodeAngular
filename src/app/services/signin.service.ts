@@ -9,6 +9,7 @@ export class ApiService {
   url: string = 'http://localhost:7000';
   sideBar: any = new Subject();
   addCate: any = new Subject();
+  categories: any = new Subject()
   constructor(private http: HttpClient) {}
   async signUp(body: any) {
     const response = await this.http
@@ -61,8 +62,8 @@ export class ApiService {
   getCategoy(name: string) {
     return this.http.get(`${this.url}/category/categories/name/${name}`)
   }
-  getCategories() {
-    return this.http.get(`${this.url}/category/categories`)
+  async getCategories() {
+    this.categories.next(await this.http.get(`${this.url}/category/categories`).toPromise())
   }
   getSubCategories(id: string) {
     return this.http.get(`${this.url}/category/sub-categories/${id}`)
