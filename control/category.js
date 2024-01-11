@@ -1,7 +1,6 @@
 const { CateSchema, subCateSchema } = require("../schemas/index");
 
 exports.findCategoy = async(req, res) => {
-  console.log(4, 'fc')
   try {
     const category = await CateSchema.findOne(req.params.id ? {_id: req.params.id } : {category: req.params.name})
     res.json(category).status(200)
@@ -20,7 +19,7 @@ exports.findSubCategoy = async(req, res) => {
 }
 
 exports.AddCategory = async (req, res) => {
-  console.log('kk')
+
   try {
     const newCategory = new CateSchema({ category: req.body.Category });
     newCategory.save();
@@ -31,13 +30,11 @@ exports.AddCategory = async (req, res) => {
     newSubCategory.save();
     res.json(newCategory).status(200);
   } catch (error) {
-    console.log(error)
     res.json(error);
   }
 };
 
 exports.findCategories = async (req, res) => {
-  console.log(req.body)
   try {
     const categories = await CateSchema.find()
     res.json(categories)

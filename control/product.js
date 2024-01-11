@@ -35,7 +35,7 @@ exports.addProducts = async (req, res, next) => {
         res.json(newProduct).status(200);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       res.json(e);
     }
   };
@@ -98,7 +98,7 @@ exports.getProduct = async (req, res) => {
 exports.something = async (req, res) => {
   try {
     const verifing = await user.verify(req, res);
-    console.log(verifing);
+    // console.log(verifing);
     res.json(verifing)
   } catch (error) {
     res.json(error);
