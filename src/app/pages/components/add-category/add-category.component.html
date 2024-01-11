@@ -4,24 +4,32 @@
             <h2 class="w-full text-center text-2xl font-semibold">Add Custom Category</h2>
         </div>
         <div class="flex flex-col gap-4 justify-center items-center h-[82%] py-3 relative">
-            <form [formGroup]="cateForm" (ngSubmit)="addCategory()" class="w-[70%] flex flex-col gap-4 justify-start items-center h-[70%] ">
+            <form [formGroup]="cateForm" (ngSubmit)="addCategory()"
+                class="w-[70%] flex flex-col gap-4 justify-start items-center h-[70%] ">
                 <div class="relative z-0 w-full group">
                     <input type="text" formControlName="Category" id="Category"
-                    class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    placeholder="" />
+                        class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder="" />
                     <label for="Category"
-                    class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Category</label>
+                        class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Category</label>
                 </div>
-                <div class="relative z-0 w-full group pb-20">
-                    <input type="text" formControlName="SubCategory" id="Sub-category"
-                    class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    placeholder="" />
-                    <label for="Sub-category"
-                    class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sub-category</label>
+                <div formArrayName="SubCategory" class="pb-20 w-full flex flex-col gap-3 max-h-36 overflow-y-auto">
+                    <div class="relative z-0 w-full group" *ngFor="let subcat of sub_cates.controls; let i = index">
+                        <input type="text" [formControlName]="i" id="Sub-category"
+                            class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder="" />
+                        <label for="Sub-category"
+                            class="peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sub-category</label>
+                        <p class="absolute right-0 top-0  h-full flex justify-center items-center"><span class="rounded-full px-3 py-0 hover:bsg-slate-200 block cursor-pointer text-2xl border-2 border-transparent hover:border-red-500 text-gray-400 font-medium hover:text-red-500" (click)="remove(i)">-</span></p>
+                    </div>
                 </div>
-                <div class="w-full absolute bottom-0 left-0 right-0 border-t-2 flex">
-                    <button class="min-w-[50%] w-[50%] max-w-[50%] border-r-2 hover:bg-gray-100 disabled:text-gray-400 font-medium sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
-                    <span class="min-w-[50%] w-[50%] max-w-[50%] block hover:bg-gray-100 disabled:text-gray-400 font-medium sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer" (click)="close()">close</span>
+                <div class="w-full absolute bottom-0 left-0 right-0 border-t-2 flex bg-white">
+                    <button
+                        class="flex-1 border-r-2 hover:bg-gray-200 disabled:text-gray-400 font-medium sm:w-auto px-5 py-2.5 text-center">Add</button>
+                    <span
+                        class="flex-1 border-r-2 block hover:bg-gray-200 disabled:text-gray-400 font-medium sm:w-auto px-5 py-2.5 text-center cursor-pointer"
+                        (click)="close()">close</span>
+                    <span class="flex-1 hover:bg-gray-200" (click)="addMore()">more</span>
                 </div>
             </form>
         </div>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/signin.service';
 
 @Component({
@@ -8,7 +8,6 @@ import { ApiService } from 'src/app/services/signin.service';
   templateUrl: './add-category.component.html',
   styleUrls: ['./add-category.component.css'],
   imports: [CommonModule, ReactiveFormsModule],
-  // providers: [ApiService],
   standalone: true
 })
 export class AddCategoryComponent {
@@ -16,13 +15,25 @@ export class AddCategoryComponent {
   constructor(private service: ApiService, private form: FormBuilder){
     this.cateForm = this.form.group({
       Category: ['', [Validators.required]],
-      SubCategory: ['', [Validators.required]]
+      SubCategory: this.form.array([
+        new FormControl('', [Validators.required, Validators.minLength(2)])
+      ])
     })
   }
   close(){
     this.service.addCate.next(false)
   }
+  get sub_cates(){
+    return this.cateForm.get('SubCategory') as FormArray
+  }
+  addMore(){    
+    this.sub_cates.push(new FormControl('', [Validators.required, Validators.minLength(2)]))
+  } 
+  remove(i: number){
+    if(this.sub_cates.length > 1) this.sub_cates.removeAt(i)    
+  }
   async addCategory(){
-    await this.service.addCategory(this.cateForm.value)
+    console.log(this.cateForm.value);
+    // await this.service.addCategory(this.cateForm.value)
   }
 }
