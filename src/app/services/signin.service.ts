@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Subject, lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -36,34 +36,35 @@ export class ApiService {
     return response;
   }
   async addProduct(body: any) {
-    const response = await this.http.post(`${this.url}/product/addProduct`, body).toPromise()
+    const response = await lastValueFrom(this.http.post(`${this.url}/product/addProduct`, body))
     return response
   }
   async getProducts() {
-    const response = await this.http.get(`${this.url}/product/getProducts`).toPromise()
+    const response = await lastValueFrom(this.http.get(`${this.url}/product/getProducts`))
     return response
   }
   async getProduct(id: string) {
-    const response = await this.http.get(`${this.url}/product/getProduct/${id}`).toPromise()
+    const response = await lastValueFrom(this.http.get(`${this.url}/product/getProduct/${id}`))
     return response
   }
   async updateProduct(id: string, body: any) {
-    const response = await this.http.patch(`${this.url}/product/updateProduct/${id}`, body).toPromise()
+    const response = await lastValueFrom(this.http.patch(`${this.url}/product/updateProduct/${id}`, body))
     return response
   }
   async removeProduct(id: string) {
-    const response = await this.http.delete(`${this.url}/product/removeProduct/${id}`).toPromise()
+    const response = await lastValueFrom(this.http.delete(`${this.url}/product/removeProduct/${id}`))
     return response
   }
   async addCategory(body: any) {
-    const response = await this.http.post(`${this.url}/category/add-category`, body).toPromise()
+    const response = await lastValueFrom(this.http.post(`${this.url}/category/add-category`, body))
+    this.getCategories()
     return response
   }
   getCategoy(name: string) {
     return this.http.get(`${this.url}/category/categories/name/${name}`)
   }
   async getCategories() {
-    this.categories.next(await this.http.get(`${this.url}/category/categories`).toPromise())
+    this.categories.next(await lastValueFrom(this.http.get(`${this.url}/category/categories`)))
   }
   getSubCategories(id: string) {
     return this.http.get(`${this.url}/category/sub-categories/${id}`)

@@ -18,6 +18,10 @@ export class ProductUpdateComponent implements OnInit, OnDestroy{
   Addcate: any;
   sub_categories: any; // ? ! difference
   categories: any;
+  addCategorySubscription: any 
+  categoriesSubscription: any
+  valuesChangesSubscription: any
+  subCategorySubscription:any
   constructor(
     private form: FormBuilder,
     private router: Router,
@@ -33,18 +37,15 @@ export class ProductUpdateComponent implements OnInit, OnDestroy{
       image: null,
     });
     this.getProductDetails();
-    this.service.addCate.subscribe((data: boolean) => {
+    this.addCategorySubscription = this.service.addCate.subscribe((data: boolean) => {
       this.Addcate = !data ? null : AddCategoryComponent
     })
     this.service.getCategories()
-    this.service.categories.subscribe((data: any) => {
-      console.log(data)
-      this.categories = data
-    });
+    this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data);
 
   }
   ngOnInit(): void {
-    this.updateForm.controls['category'].valueChanges.subscribe((data: any) => this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
+    this.valuesChangesSubscription = this.updateForm.controls['category'].valueChanges.subscribe((data: any) => this.subCategorySubscription = this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
   }
   uploadImage(file_input: any) {
     file_input.click();
@@ -91,8 +92,9 @@ export class ProductUpdateComponent implements OnInit, OnDestroy{
     this.service.addCate.next(true)
   }
   ngOnDestroy(): void {
-    this.service.addCate.unsubscribe()
-    this.updateForm.controls['category'].valueChanges.unsubscribe()
-    // this.service.getCategories().unsubscribe()
+    this.addCategorySubscription?.unsubscribe()
+    this.subCategorySubscription?.unsubscribe()
+    this.valuesChangesSubscription?.unsubscribe()
+    this.categoriesSubscription?.unsubscribe()
   }
 }

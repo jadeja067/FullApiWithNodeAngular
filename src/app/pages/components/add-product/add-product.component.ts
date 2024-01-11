@@ -16,6 +16,10 @@ export class AddProductComponent implements OnInit, OnDestroy{
   imageSrc: string =
     'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220';
   loading: any = false
+  addCategorySubscription: any 
+  categoriesSubscription: any
+  valuesChangesSubscription: any
+  subCategorySubscription:any
   constructor(private form: FormBuilder, private router: Router, private service: ApiService) {
     this.addProductForm = this.form.group({
       img: ['', [Validators.required]],
@@ -27,17 +31,14 @@ export class AddProductComponent implements OnInit, OnDestroy{
       user: localStorage.getItem('user'),
       image: null
     });
-    this.service.addCate.subscribe((data: boolean) => {
+    this.addCategorySubscription = this.service.addCate.subscribe((data: boolean) => {
       this.Addcate = !data ? null : AddCategoryComponent
     })
     this.service.getCategories()
-    this.service.categories.subscribe((data: any) => {
-      console.log(data)
-      this.categories = data
-    });
+    this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data);
   }
   ngOnInit(): void {
-    this.addProductForm.controls['category'].valueChanges.subscribe((data: any) => this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
+    this.valuesChangesSubscription = this.addProductForm.controls['category'].valueChanges.subscribe((data: any) => this.subCategorySubscription = this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
   }
   uploadImage(file_input: any) {
     file_input.click();
@@ -71,8 +72,9 @@ export class AddProductComponent implements OnInit, OnDestroy{
     this.service.addCate.next(true)
   }
   ngOnDestroy(): void {
-    this.service.addCate.unsubscribe()
-    this.service.categories.unsubscribe()
-    // this.addProductForm.controls['category'].valueChanges.unsubscribe()
+      this.addCategorySubscription?.unsubscribe()
+      this.subCategorySubscription?.unsubscribe()
+      this.valuesChangesSubscription?.unsubscribe()
+      this.categoriesSubscription?.unsubscribe()
   }
 }
