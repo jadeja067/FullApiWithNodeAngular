@@ -5,11 +5,12 @@
 div::-webkit-scrollbar,
 body::-webkit-scrollbar,
 input::-webkit-scrollbar,
+form::-webkit-scrollbar,
 textarea::-webkit-scrollbar{
     display: none;
 }
 
-div,body,input,textarea{
+div,body,input,textarea,form{
     -ms-overflow-style: none;
     scrollbar-width: none;
 }

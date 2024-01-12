@@ -1,11 +1,12 @@
-<div class="md:absolute fixed flex justify-center h-full items-center top-0 right-0 bottom-0 left-0 z-50 bg-gray-700/80">
+<div
+    class="md:absolute fixed flex justify-center h-full items-center top-0 right-0 bottom-0 left-0 z-50 bg-gray-700/80">
     <div class="bg-white w-[30%] min-w-80 h-100 shadow">
         <div class="flex p-2 justify-center items-center select-none relative py-2 border-b-2">
             <h2 class="w-full text-center text-2xl font-semibold">Add Custom Category</h2>
         </div>
         <div class="flex flex-col gap-4 justify-center items-center h-[82%] py-3 relative">
             <form [formGroup]="cateForm" (ngSubmit)="addCategory()"
-                class="w-[70%] flex flex-col justify-start items-center h-[70%] overflow-y-hidden">
+                class="w-[70%] flex flex-col justify-start items-center h-[70%]">
                 <div class="relative z-0 w-full group">
                     <div *ngIf="addCustomCategoryEnabled">
                         <input type="text" formControlName="Category" id="Category"
@@ -21,7 +22,9 @@
                                 {{cate.category}}</option>
                         </select>
                     </div>
-                    <span class="absolute hover:border-blue-600 hover:text-blue-600 px-2.5 -right-[3.4rem] text-gray-500 border-b-2 border-gray-300 h-full top-0 flex justify-center items-center" (click)="toggleCustomEnabled()">
+                    <span
+                        class="absolute hover:border-blue-600 hover:text-blue-600 px-2.5 -right-[3.4rem] text-gray-500 border-b-2 border-gray-300 h-full top-0 flex justify-center items-center"
+                        (click)="toggleCustomEnabled()">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -29,7 +32,7 @@
                         </svg>
                     </span>
                 </div>
-                <div formArrayName="SubCategory" class="pb-14 pt-4 w-full flex flex-col overflow-y-auto">
+                <div formArrayName="SubCategory" class="pb-14 pt-4 w-full flex flex-col gap-3">
                     <div class="relative z-0 w-full group" *ngFor="let subcat of sub_cates.controls; let i = index">
                         <input type="text" [formControlName]="i" id="Sub-category-{{i}}"
                             class="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 hover:border-blue-600 focus:border-blue-600 peer"

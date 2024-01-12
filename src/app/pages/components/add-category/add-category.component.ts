@@ -20,8 +20,8 @@ import { ApiService } from 'src/app/services/signin.service';
 export class AddCategoryComponent implements OnDestroy {
   cateForm: FormGroup;
   categories: any;
-  categoriesSubscription: any
-  addCustomCategoryEnabled: boolean = false
+  categoriesSubscription: any;
+  addCustomCategoryEnabled: boolean = false;
   valuesChangeSubscription: any;
   constructor(private service: ApiService, private form: FormBuilder) {
     this.cateForm = this.form.group({
@@ -30,8 +30,7 @@ export class AddCategoryComponent implements OnDestroy {
         new FormControl('', [Validators.required, Validators.minLength(2)]),
       ]),
     });
-    this.fetchAllCategories()
-
+    this.fetchAllCategories();
   }
   close() {
     this.service.addCate.next(false);
@@ -47,20 +46,20 @@ export class AddCategoryComponent implements OnDestroy {
   remove(i: number) {
     if (this.sub_cates.length > 1) this.sub_cates.removeAt(i);
   }
-  fetchAllCategories(){
-    this.service.getCategories()
-    this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data)
+  fetchAllCategories() {
+    this.service.getCategories();
+    this.categoriesSubscription = this.service.categories.subscribe(
+      (data: any) => (this.categories = data)
+    );
   }
   async addCategory() {
-    await this.service.addCategory(this.cateForm.value)
-    console.log(this.cateForm.value);
-    
+    await this.service.addCategory(this.cateForm.value);
   }
-  toggleCustomEnabled(){
-    this.addCustomCategoryEnabled = !this.addCustomCategoryEnabled    
-    this.cateForm.controls["Category"].reset()
+  toggleCustomEnabled() {
+    this.addCustomCategoryEnabled = !this.addCustomCategoryEnabled;
+    this.cateForm.controls['Category'].reset();
   }
   ngOnDestroy(): void {
-    this.categoriesSubscription.unsubscribe()
+    this.categoriesSubscription.unsubscribe();
   }
 }
