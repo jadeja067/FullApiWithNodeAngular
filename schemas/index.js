@@ -60,7 +60,6 @@ const subCateSchema = new Schema({
     subCategory: {
         type: String,
         required: true,
-        unique: true
     },
     cateId: {
         type: String,

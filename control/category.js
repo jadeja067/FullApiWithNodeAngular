@@ -31,16 +31,19 @@ exports.AddCategory = async (req, res) => {
       newCategory.save();
     }
     const SubCategories = [];
-    console.log(newCategory);
-    req.body.SubCategory?.forEach((el) => {
-      if (el) {
-        const newSubCategory = new subCateSchema({
+    req.body.SubCategory?.forEach(async (el) => {
+      const newSubCategory = await subCateSchema.findOne({
+        subCategory: el.trim(),
+        cateId: newCategory.category,
+      });
+      if (!newSubCategory) {
+        newSubCategory = new subCateSchema({
           subCategory: el.trim(),
           cateId: newCategory.category,
         });
         newSubCategory.save();
         SubCategories.push(newSubCategory);
-      }
+      }else SubCategories.push(newSubCategory)
     });
     res
       .json({
@@ -49,7 +52,6 @@ exports.AddCategory = async (req, res) => {
       })
       .status(200);
   } catch (error) {
-    console.log(error);
     res.json(error);
   }
 };
