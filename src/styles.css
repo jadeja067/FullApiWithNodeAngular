@@ -13,3 +13,9 @@ div,body,input,textarea{
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+label{
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none; 
+  
+}

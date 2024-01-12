@@ -37,9 +37,7 @@ export class ProductUpdateComponent implements OnInit, OnDestroy{
       image: null,
     });
     this.getProductDetails();
-    this.addCategorySubscription = this.service.addCate.subscribe((data: boolean) => {
-      this.Addcate = !data ? null : AddCategoryComponent
-    })
+    this.addCategorySubscription = this.service.addCate.subscribe((data: boolean) => this.Addcate = !data ? null : AddCategoryComponent)
     this.service.getCategories()
     this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data);
 
