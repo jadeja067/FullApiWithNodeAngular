@@ -21,7 +21,6 @@ const uploadToCloud = async (path) => {
   const result = await cloudinary.uploader.upload(path);
   return result;
 };
-const user = require("./user");
 
 exports.addProducts = async (req, res, next) => {
   let Add = async () => {
@@ -35,7 +34,6 @@ exports.addProducts = async (req, res, next) => {
         res.json(newProduct).status(200);
       }
     } catch (e) {
-      // console.log(e);
       res.json(e);
     }
   };
@@ -95,12 +93,11 @@ exports.getProduct = async (req, res) => {
   }
 };
 
-exports.something = async (req, res) => {
+exports.getYourProducts = async(req, res) => {
   try {
-    const verifing = await user.verify(req, res);
-    // console.log(verifing);
-    res.json(verifing)
+    const products = await productSchema.find({user: req.params.uid})
+    res.json(products).status(200)
   } catch (error) {
-    res.json(error);
+    res.json(error)
   }
-};
+}

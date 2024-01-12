@@ -32,7 +32,7 @@ exports.AddCategory = async (req, res) => {
     }
     const SubCategories = [];
     req.body.SubCategory?.forEach(async (el) => {
-      const newSubCategory = await subCateSchema.findOne({
+      let newSubCategory = await subCateSchema.findOne({
         subCategory: el.trim(),
         cateId: newCategory.category,
       });
@@ -45,13 +45,13 @@ exports.AddCategory = async (req, res) => {
         SubCategories.push(newSubCategory);
       }else SubCategories.push(newSubCategory)
     });
-    res
-      .json({
+    res.json({
         category: newCategory,
         sub_categories: SubCategories,
       })
       .status(200);
   } catch (error) {
+    console.log(error)
     res.json(error);
   }
 };

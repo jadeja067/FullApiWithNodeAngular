@@ -3,10 +3,11 @@ const express = require("express");
 const router = express.Router();
 
 router
-  .post("/addProduct", product.addProducts)
   .get("/getProducts", product.getProducts)
+  .get("/getProducts/:uid", product.getYourProducts)
   .get("/getProduct/:id", product.getProduct)
+  .post("/addProduct", product.addProducts)
   .patch("/updateProduct/:id", product.updateProductDetails)
-  .delete('/removeProduct/:id', product.deleteProduct).get('/some', product.something)
+  .delete("/removeProduct/:id", product.deleteProduct);
 
 exports.router = router;
