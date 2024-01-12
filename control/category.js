@@ -19,16 +19,28 @@ exports.findSubCategoy = async(req, res) => {
 }
 
 exports.AddCategory = async (req, res) => {
-
   try {
-    const newCategory = new CateSchema({ category: req.body.Category });
-    newCategory.save();
-    const newSubCategory = new subCateSchema({
-      subCategory: req.body.SubCategory,
-      cateId: req.body.Category,
+    const newCategory = await CateSchema.findOne({category: req.body.Category})
+    const category = req.body.Category
+    if(!newCategory?._id){
+      newCategory = new CateSchema({ category: category.trim() });
+      newCategory.save();
+    }
+    const SubCategories = []
+    req.body.SubCategory?.forEach(el => {
+      if(el){
+        const newSubCategory = new subCateSchema({
+          subCategory: el.trim(),
+          cateId: category.trim(),
+        });  
+        newSubCategory.save();
+        SubCategories.push(newSubCategory)
+      }
     });
-    newSubCategory.save();
-    res.json(newCategory).status(200);
+    res.json({
+      category: newCategory,
+      sub_categories: SubCategories
+    }).status(200);
   } catch (error) {
     res.json(error);
   }
