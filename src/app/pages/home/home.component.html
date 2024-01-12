@@ -1,6 +1,6 @@
 <p class="py-3 text-3xl font-bold">Nature</p>
 <div class="w-100 p-2 h-100 flex gap-2 overflow-x-scroll" *ngIf="products">
-    <a routerLink="product-details/{{product._id}}" *ngFor="let product of products"
+    <a routerLink="product/{{product._id}}" *ngFor="let product of products"
         class="inline-block md:w-60 md:h-72 w-56 h-64 bg-white border relative border-gray-200 rounded-lg shadow overflow-hidden dark:bg-gray-800 dark:border-gray-700">
         <div class="h-full product_image">
             <img class="h-full w-full" src={{product.img}} alt={{product.name}} loading="lazy"/>

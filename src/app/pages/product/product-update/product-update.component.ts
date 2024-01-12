@@ -24,7 +24,7 @@ export class ProductUpdateComponent implements AfterViewInit, OnDestroy{
     private router: Router,
     private service: ApiService
   ) {
-    this.product_id = router.routerState.snapshot.url.split('/')[3];
+    this.product_id = router.routerState.snapshot.url.split('/')[4];    
     this.updateForm = this.form.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', [Validators.required, Validators.minLength(20)]],
