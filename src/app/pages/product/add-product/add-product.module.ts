@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './add-product.component';
-import { AddCategoryComponent } from "../add-category/add-category.component";
+import { AddCategoryComponent } from "../../components/add-category/add-category.component";
 
 const routes: Routes = [{ path: '', component: AddProductComponent }];
 

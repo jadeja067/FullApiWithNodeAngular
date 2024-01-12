@@ -1,4 +1,4 @@
-<div class="h-full w-full flex justify-center items-start gap-2 py-4"
+<div class="h-full box-border border w-full flex justify-center items-start gap-2 py-4"
     [ngClass]="!productDetails ? 'space-y-8 animate-pulse md:space-y-0 md:space-x-8': ''">
     <div class="flex gap-8 items-center justify-center h-full md:w-[60%] w-screen md:flex-row flex-col rounded-lg md:overflow-hidden">
         <div class="h-full md:w-[50%]">
@@ -64,7 +64,6 @@
                     <a routerLink="/dashboard/product-update/{{product_id}}" class="rounded-lg bg-blue-700 text-white py-2 px-5">Edit</a>
                     <button class="rounded-lg bg-blue-700 text-white py-2 px-5" (click)="remove(productDetails._id)">Delete</button>
                 </div>
-                
             </div>
         </div>
     </div>

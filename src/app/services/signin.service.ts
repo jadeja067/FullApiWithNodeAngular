@@ -9,51 +9,44 @@ export class ApiService {
   url: string = 'http://localhost:7000';
   sideBar: any = new Subject();
   addCate: any = new Subject();
-  categories: any = new Subject()
-  constructor(private http: HttpClient) {}
+  categories: any = new Subject();
+  open_sub_categories_compo:any = new Subject()
+  constructor(private http: HttpClient) {
+    this.getCategories()
+  }
   async signUp(body: any) {
-    const response = await this.http
-      .post(`${this.url}/user/signup`, body)
-      .toPromise();
-    return response;
+    return await lastValueFrom(this.http
+      .post(`${this.url}/user/signup`, body));
   }
   async signIn(body: any) {
-    const response = await this.http
-      .post(`${this.url}/user/signin`, body)
-      .toPromise();
-    return response;
+    return await lastValueFrom(this.http
+      .post(`${this.url}/user/signin`, body))
   }
   async sendMail(body: any) {
-    const response = await this.http
-      .post(`${this.url}/user/sendmail`, body)
-      .toPromise();
-    return response;
+    return await lastValueFrom(this.http
+      .post(`${this.url}/user/sendmail`, body))
   }
   async updatePassword(body: any) {
-    const response = await this.http
-      .patch(`${this.url}/user/changePassword`, body)
-      .toPromise();
-    return response;
+    return await lastValueFrom(this.http
+      .patch(`${this.url}/user/changePassword`, body))
   }
   async addProduct(body: any) {
-    const response = await lastValueFrom(this.http.post(`${this.url}/product/addProduct`, body))
-    return response
+    return await lastValueFrom(this.http.post(`${this.url}/product/addProduct`, body))
+  }
+  async getAllProducts() {
+    return await lastValueFrom(this.http.get(`${this.url}/product/getProducts`))
   }
   async getProducts() {
-    const response = await lastValueFrom(this.http.get(`${this.url}/product/getProducts`))
-    return response
+    return await lastValueFrom(this.http.get(`${this.url}/product/getProducts/${localStorage.getItem('user')}`))
   }
   async getProduct(id: string) {
-    const response = await lastValueFrom(this.http.get(`${this.url}/product/getProduct/${id}`))
-    return response
+    return await lastValueFrom(this.http.get(`${this.url}/product/getProduct/${id}`))
   }
   async updateProduct(id: string, body: any) {
-    const response = await lastValueFrom(this.http.patch(`${this.url}/product/updateProduct/${id}`, body))
-    return response
+    return await lastValueFrom(this.http.patch(`${this.url}/product/updateProduct/${id}`, body))
   }
   async removeProduct(id: string) {
-    const response = await lastValueFrom(this.http.delete(`${this.url}/product/removeProduct/${id}`))
-    return response
+    return await lastValueFrom(this.http.delete(`${this.url}/product/removeProduct/${id}`))
   }
   async addCategory(body: any) {
     const response = await lastValueFrom(this.http.post(`${this.url}/category/add-category`, body))

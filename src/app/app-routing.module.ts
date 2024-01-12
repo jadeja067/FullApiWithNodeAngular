@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './forms/signin/signin.component';
-import { isSignInGuard } from './is-sign-in.guard';
+import { isSignInGuard } from './guards/is-sign-in.guard';
 
 const routes: Routes = [
   {path: "", pathMatch:"full", redirectTo: 'sign'},

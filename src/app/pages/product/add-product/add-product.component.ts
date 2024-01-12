@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
-import { AddCategoryComponent } from '../add-category/add-category.component';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -10,13 +9,11 @@ import { AddCategoryComponent } from '../add-category/add-category.component';
 })
 export class AddProductComponent implements OnInit, OnDestroy{
   addProductForm: FormGroup;
-  Addcate!: any  
   categories: any
   sub_categories: any
   imageSrc: string =
     'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220';
   loading: any = false
-  addCategorySubscription: any 
   categoriesSubscription: any
   valuesChangesSubscription: any
   subCategorySubscription:any
@@ -31,9 +28,6 @@ export class AddProductComponent implements OnInit, OnDestroy{
       user: localStorage.getItem('user'),
       image: null
     });
-    this.addCategorySubscription = this.service.addCate.subscribe((data: boolean) => {
-      this.Addcate = !data ? null : AddCategoryComponent
-    })
     this.service.getCategories()
     this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data);
   }
@@ -72,7 +66,6 @@ export class AddProductComponent implements OnInit, OnDestroy{
     this.service.addCate.next(true)
   }
   ngOnDestroy(): void {
-      this.addCategorySubscription?.unsubscribe()
       this.subCategorySubscription?.unsubscribe()
       this.valuesChangesSubscription?.unsubscribe()
       this.categoriesSubscription?.unsubscribe()

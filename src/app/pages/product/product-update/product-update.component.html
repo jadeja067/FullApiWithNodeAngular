@@ -28,13 +28,13 @@
                     <div class="relative z-0 w-full mb-5 group">
                         <select formControlName="category" id="category"
                             class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 dark:text-gray-400">
-                            <option *ngFor="let cate of categories" value={{cate.category}} [selected]="cate.category == productDetails.category"class="text-black">{{cate.category}}</option>
+                            <option *ngFor="let cate of categories" value={{cate.category}} class="text-black">{{cate.category}}</option>
                         </select>
                     </div>
                     <div class="relative z-0 w-full mb-5 group">
                         <select formControlName="subCategory" id="sub-category"
                             class="w-full border-0 border-b-2 border-gray-300 focus:ring-0 dark:text-gray-400">
-                            <option *ngFor="let subC of sub_categories" value={{subC.subCategory}} [selected]="subC.subCategory == productDetails.subCategory" class="text-black">{{subC.subCategory}}</option>
+                            <option *ngFor="let subC of sub_categories" value={{subC.subCategory}} class="text-black">{{subC.subCategory}}</option>
                         </select>
                     </div>
                     <span title="Add custome category" class="cursor-pointer border-b-2 text-3xl border-gray-300 px-4 py-0.5 font-light text-gray-500 mb-5 focus:text-blue-600 focus:border-blue-600" (click)="open()">+</span>
@@ -66,5 +66,4 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <ng-container [ngComponentOutlet]="Addcate"></ng-container>
 </div>

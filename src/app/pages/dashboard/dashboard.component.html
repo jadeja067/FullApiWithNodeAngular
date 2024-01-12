@@ -1,7 +1,11 @@
 <app-navbar></app-navbar>
 <div class="flex justify-start items-start md:h-[89vh] h-screen box-border">
-    <app-sidebar class="md:static absolute z-40 transition-all top-[5.1rem] bottom-0 duration-300 ease-in-out h-full" [ngClass]="!sideBar ? '-left-[50%]' :'left-0'"></app-sidebar>
-    <div class="md:h-[89vh] h-screen w-full float-start">
+    <app-sidebar class="md:static absolute z-40 transition-all top-[5.1rem] bottom-0 duration-300 ease-in-out h-full"
+        [ngClass]="!sideBar ? '-left-[50%]' :'left-0'"></app-sidebar>
+    <div class="md:h-[89vh] h-screen w-full float-start relative"
+        [ngClass]="SubCatListComponent ? 'overflow-y-hidden' : 'overflow-y-auto'">
         <router-outlet></router-outlet>
+        <ng-container [ngComponentOutlet]="SubCatListComponent"></ng-container>
+        <ng-container [ngComponentOutlet]="Addcate"></ng-container>
     </div>
 </div>

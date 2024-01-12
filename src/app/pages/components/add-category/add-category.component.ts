@@ -30,7 +30,7 @@ export class AddCategoryComponent implements OnDestroy {
         new FormControl('', [Validators.required, Validators.minLength(2)]),
       ]),
     });
-    this.fetchAllCategories();
+    this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data)
   }
   close() {
     this.service.addCate.next(false);
@@ -46,12 +46,7 @@ export class AddCategoryComponent implements OnDestroy {
   remove(i: number) {
     if (this.sub_cates.length > 1) this.sub_cates.removeAt(i);
   }
-  fetchAllCategories() {
-    this.service.getCategories();
-    this.categoriesSubscription = this.service.categories.subscribe(
-      (data: any) => (this.categories = data)
-    );
-  }
+  
   async addCategory() {
     await this.service.addCategory(this.cateForm.value);
   }

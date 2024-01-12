@@ -1,24 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/signin.service';
-import { AddCategoryComponent } from '../add-category/add-category.component';
 
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
   styleUrls: ['./product-update.component.css'],
 })
-export class ProductUpdateComponent implements OnInit, OnDestroy{
+export class ProductUpdateComponent implements AfterViewInit, OnDestroy{
   product_id: string;
   updateForm: any;
   productDetails!: any;
   imgUrl?: string;
   loading: any = false
-  Addcate: any;
-  sub_categories: any; // ? ! difference
+  sub_categories: any; 
   categories: any;
-  addCategorySubscription: any 
   categoriesSubscription: any
   valuesChangesSubscription: any
   subCategorySubscription:any
@@ -37,12 +34,9 @@ export class ProductUpdateComponent implements OnInit, OnDestroy{
       image: null,
     });
     this.getProductDetails();
-    this.addCategorySubscription = this.service.addCate.subscribe((data: boolean) => this.Addcate = !data ? null : AddCategoryComponent)
-    this.service.getCategories()
-    this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data);
-
+    this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data)
   }
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.valuesChangesSubscription = this.updateForm.controls['category'].valueChanges.subscribe((data: any) => this.subCategorySubscription = this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
   }
   uploadImage(file_input: any) {
@@ -90,9 +84,8 @@ export class ProductUpdateComponent implements OnInit, OnDestroy{
     this.service.addCate.next(true)
   }
   ngOnDestroy(): void {
-    this.addCategorySubscription?.unsubscribe()
-    this.subCategorySubscription?.unsubscribe()
-    this.valuesChangesSubscription?.unsubscribe()
-    this.categoriesSubscription?.unsubscribe()
+    this.subCategorySubscription.unsubscribe()
+    this.valuesChangesSubscription.unsubscribe()
+    this.categoriesSubscription.unsubscribe()
   }
 }
