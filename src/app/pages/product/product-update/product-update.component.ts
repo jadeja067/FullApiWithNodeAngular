@@ -1,7 +1,7 @@
 import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/signin.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-product-update',
@@ -18,7 +18,6 @@ export class ProductUpdateComponent implements AfterViewInit, OnDestroy{
   categories: any;
   categoriesSubscription: any
   valuesChangesSubscription: any
-  subCategorySubscription:any
   constructor(
     private form: FormBuilder,
     private router: Router,
@@ -38,7 +37,7 @@ export class ProductUpdateComponent implements AfterViewInit, OnDestroy{
     this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data)
   }
   ngAfterViewInit(): void {
-    this.valuesChangesSubscription = this.updateForm.controls['category'].valueChanges.subscribe((data: any) => this.subCategorySubscription = this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
+    this.valuesChangesSubscription = this.updateForm.controls['category'].valueChanges.subscribe((data: any) => this.sub_categories = this.service.getSubCategories(data))
   }
   uploadImage(file_input: any) {
     file_input.click();
@@ -85,7 +84,6 @@ export class ProductUpdateComponent implements AfterViewInit, OnDestroy{
     this.service.addCate.next(true)
   }
   ngOnDestroy(): void {
-    this.subCategorySubscription.unsubscribe()
     this.valuesChangesSubscription.unsubscribe()
     this.categoriesSubscription.unsubscribe()
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/signin.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-sub-cat-list',
@@ -8,8 +8,15 @@ import { ApiService } from 'src/app/services/signin.service';
   styleUrls: ['./sub-cat-list.component.css'],
 })
 export class SubCatListComponent implements OnInit{
-  constructor(private service: ApiService) {
+  category: any
+  sub_categories: any;
+  constructor(private service: ApiService, private router: Router) {
+    this.category = this.router.routerState.snapshot.url.split('/')[3].split('%20').join(' ')
+    this.sub_categories = this.service.getSubCategories(this.category)
   }
-  ngOnInit(): void {
+  ngOnInit(): void {    
+  }
+  add(){
+    this.service.addCate.next(true)
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/signin.service';
+import { ApiService } from 'src/app/services/api.service';
 import { SubCatListComponent } from '../category/sub-cat-list/sub-cat-list.component';
 import { AddCategoryComponent } from '../category/add-category/add-category.component';
 

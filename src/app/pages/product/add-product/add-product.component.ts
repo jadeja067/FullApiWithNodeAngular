@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/signin.service';
+import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -16,7 +16,6 @@ export class AddProductComponent implements OnInit, OnDestroy{
   loading: any = false
   categoriesSubscription: any
   valuesChangesSubscription: any
-  subCategorySubscription:any
   constructor(private form: FormBuilder, private router: Router, private service: ApiService) {
     this.addProductForm = this.form.group({
       img: ['', [Validators.required]],
@@ -33,7 +32,7 @@ export class AddProductComponent implements OnInit, OnDestroy{
     this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data);
   }
   ngOnInit(): void {
-    this.valuesChangesSubscription = this.addProductForm.controls['category'].valueChanges.subscribe((data: any) => this.subCategorySubscription = this.service.getSubCategories(data).subscribe((data: any) => this.sub_categories = data))
+    this.valuesChangesSubscription = this.addProductForm.controls['category'].valueChanges.subscribe((data: any) => this.sub_categories = this.service.getSubCategories(data))
   }
   uploadImage(file_input: any) {
     file_input.click();
@@ -67,7 +66,6 @@ export class AddProductComponent implements OnInit, OnDestroy{
     this.service.addCate.next(true)
   }
   ngOnDestroy(): void {
-      this.subCategorySubscription?.unsubscribe()
       this.valuesChangesSubscription?.unsubscribe()
       this.categoriesSubscription?.unsubscribe()
   }

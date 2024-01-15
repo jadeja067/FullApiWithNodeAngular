@@ -56,7 +56,7 @@ export class ApiService {
   async getCategories() {
     this.categories.next(await lastValueFrom(this.http.get(`${this.url}/category/categories`)))
   }
-  getSubCategories(id: string) {
-    return this.http.get(`${this.url}/category/sub-categories/${id}`)
+  async getSubCategories(id: string) {
+    return await lastValueFrom(this.http.get(`${this.url}/category/sub-categories/${id}`))
   }
 }
