@@ -30,6 +30,7 @@ export class AddCategoryComponent implements OnDestroy {
         new FormControl('', [Validators.required, Validators.minLength(2)]),
       ]),
     });
+    this.service.getCategories()
     this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data)
   }
   close() {

@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductDetailsComponent } from './product-details.component';
+import { SubCatListComponent } from './sub-cat-list.component';
 
 const routes: Routes = [
-  {path: '', component: ProductDetailsComponent}
+  {path: '', component:SubCatListComponent}
 ]
 
 @NgModule({
-  declarations: [ProductDetailsComponent],
+  declarations: [SubCatListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  exports: [RouterModule]
+  exports:[RouterModule]
+
 })
-export class ProductDetailsModule { }
+export class SubCatListModule { }

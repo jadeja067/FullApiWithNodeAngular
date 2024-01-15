@@ -20,3 +20,6 @@ label{
     user-select: none; 
   
 }
+button, span, a{
+    user-select: none;
+}

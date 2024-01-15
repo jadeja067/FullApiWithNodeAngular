@@ -9,11 +9,10 @@ import { ApiService } from 'src/app/services/signin.service';
 })
 export class SidebarComponent {
   categories:any
+
   constructor(private router: Router, private service: ApiService){
+    this.service.getCategories()
     this.service.categories.subscribe((data: any) => this.categories = data);
-  }
-  open_sub_categories(sub_category: string){
-    this.service.open_sub_categories_compo.next(sub_category)
   }
   
 }

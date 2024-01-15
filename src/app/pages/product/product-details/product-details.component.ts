@@ -17,8 +17,7 @@ export class ProductDetailsComponent {
     this.getProductDetails()
   }
   async getProductDetails(){
-    const response = await this.service.getProduct(this.product_id)
-    this.productDetails = response    
+    this.productDetails = await this.service.getProduct(this.product_id) 
   }
   async remove(id: string){
     await this.service.removeProduct(id)

@@ -7,15 +7,14 @@ import { NavbarComponent} from "./components/navbar/navbar.component";
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { ProductDetailsComponent } from './product/product-details/product-details.component';
-import { SubCatListComponent } from './components/sub-cat-list/sub-cat-list.component';
 
 const routes: Routes =[
   {path: '', component: DashboardComponent, children:[
     {path:"", component: HomeComponent},
     {path:"about", component: AboutComponent},
     {path:"contact", component: ContactComponent},
-    {path: "product", loadChildren: () => import('./product/product.module').then(mod => mod.ProductModule)}
+    {path: "product", loadChildren: () => import('./product/product.module').then(mod => mod.ProductModule)},
+    {path: "category",loadChildren:() => import('./category/category.module').then(mod => mod.CategoryModule)}
   ]}
 ]
 
@@ -27,7 +26,6 @@ const routes: Routes =[
     HomeComponent,
     ContactComponent,
     SidebarComponent,
-    ProductDetailsComponent,
   ],
   imports: [
     CommonModule,

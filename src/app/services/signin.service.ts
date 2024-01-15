@@ -7,13 +7,10 @@ import { Subject, lastValueFrom } from 'rxjs';
 })
 export class ApiService {
   url: string = 'http://localhost:7000';
-  sideBar: any = new Subject();
-  addCate: any = new Subject();
-  categories: any = new Subject();
-  open_sub_categories_compo:any = new Subject()
-  constructor(private http: HttpClient) {
-    this.getCategories()
-  }
+  sideBar: Subject<any> = new Subject();
+  addCate: Subject<any> = new Subject();
+  categories: Subject<any> = new Subject();
+  constructor(private http: HttpClient) {}
   async signUp(body: any) {
     return await lastValueFrom(this.http
       .post(`${this.url}/user/signup`, body));

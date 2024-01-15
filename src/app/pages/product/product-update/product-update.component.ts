@@ -34,6 +34,7 @@ export class ProductUpdateComponent implements AfterViewInit, OnDestroy{
       image: null,
     });
     this.getProductDetails();
+    this.service.getCategories()
     this.categoriesSubscription = this.service.categories.subscribe((data: any) => this.categories = data)
   }
   ngAfterViewInit(): void {
