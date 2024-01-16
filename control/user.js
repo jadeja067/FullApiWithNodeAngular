@@ -1,5 +1,5 @@
 const { userschema } = require("../schemas/index"),
-  jwt = require('jsonwebtoken'),
+  jwt = require("jsonwebtoken"),
   nodemailer = require("nodemailer"),
   { google } = require("googleapis"),
   OAuth2 = google.auth.OAuth2,
@@ -12,6 +12,8 @@ oauth2Client.setCredentials({
   refresh_token:
     "1//04QV3zkUuyFyrCgYIARAAGAQSNwF-L9IrLcGzgfXW3ARQcW-NOMMaF3oCsI5pEr7acA5VgBWH9S13acXNRgQY5X91QXuZ8rNnBuo",
 });
+const cyptoJS = require("crypto-js");
+
 const accessToken = oauth2Client.getAccessToken(),
   transporter = nodemailer.createTransport({
     service: "gmail",
@@ -45,19 +47,28 @@ const send = () => {
     }
   });
 };
-const generateToken = (data) => jwt.sign(data, process.env.JWT_SECRET_KEY); 
+const expirationTime = Math.floor(Date.now() / 1000) + (60 * 60 * 24);
+const generateToken = (data) =>
+  jwt.sign(
+    {
+      exp: expirationTime,
+      data: data,
+    },
+    process.env.JWT_SECRET_KEY
+  );
+const encypt = (pass) => cyptoJS.SHA256(pass);
 
 exports.sendMail = async (req, res) => {
   try {
-    const find = await userschema.findOne({email: req.body.email})
-    if(find){
+    const find = await userschema.findOne({ email: req.body.email });
+    if (find) {
       const OTP = Math.floor(Math.random() * 10000);
       mailOptions.to = await req.body.email;
       mailOptions.text = `Your OTP is ${OTP}`;
       send();
-      res.json({ OTP: OTP }).status(200)
-    }else{
-      res.json({error: "this email doesn't exist."}).status(404)
+      res.json({ OTP: OTP }).status(200);
+    } else {
+      res.json({ error: "this email doesn't exist." }).status(404);
     }
   } catch (e) {
     res.json(e);
@@ -66,39 +77,26 @@ exports.sendMail = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
   try {
+    const pass = encypt(req.body.password);
     const user = await userschema.updateOne(
       { email: req.body.email },
-      { $set: { password: req.body.password }}
+      { $set: { password: pass.toString() } }
     );
-    console.log()
-    res.json(user).status(200)
+    res.json(user).status(200);
   } catch (e) {
+    console.log(e);
     res.json(e);
   }
 };
 
 exports.singin = async (req, res) => {
   try {
+    req.body.password = encypt(req.body.password);
     const user = await userschema.findOne(req.body);
     if (user) {
-      const Token = generateToken(req.body)
-      res.json({ found: 1, token: Token, user: user._id}).status(200);
-    }
-    else res.json(null).status(404);
-  } catch (e) {
-    res.json(e);
-  }
-};
-
-exports.verify = async (req, res) => {
-  const verifing = jwt.verify(req.body.token, process.env.JWT_SECRET_KEY)
-  try {
-    const user = await userschema.findOne({
-      email: verifing.email,
-      password: verifing.password
-    });
-    if (user) res.json(1).status(200)
-    else res.json(0).status(400)
+      const Token = generateToken(req.body);
+      res.json({ found: 1, token: Token, user: user._id }).status(200);
+    } else res.json(null).status(404);
   } catch (e) {
     res.json(e);
   }
@@ -106,12 +104,13 @@ exports.verify = async (req, res) => {
 
 exports.singup = async (req, res) => {
   try {
-    const find = await userschema.findOne({email: req.body.email})
-    if(!find){
+    req.body.password = encypt(req.body.password);
+    const find = await userschema.findOne({ email: req.body.email });
+    if (!find) {
       const user = new userschema(req.body);
       await user.save();
       res.json(user).status(200);
-    }else res.json(null)
+    } else res.json(null);
   } catch (e) {
     res.json(e);
   }

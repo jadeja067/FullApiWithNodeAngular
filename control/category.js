@@ -73,3 +73,23 @@ exports.findSubCategories = async (req, res) => {
     res.json(error);
   }
 };
+
+exports.deleteCategory = async (req, res) => {
+  try {
+    const deleteCategory = await CateSchema.findOneAndDelete({_id: req.params.id})
+    if(deleteCategory){
+      await subCateSchema.deleteMany({cateId: deleteCategory.category})
+    }
+    res.json(deleteCategory)
+  } catch (error) {
+    res.json(error)
+  }
+}
+exports.deleteSubCategory = async (req, res) => {
+  try {
+    const deleteCategory = await subCateSchema.findOneAndDelete({_id: req.params.id})
+    res.json(deleteCategory)
+  } catch (error) {
+    res.json(error)
+  }
+}

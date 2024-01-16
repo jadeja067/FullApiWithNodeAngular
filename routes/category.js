@@ -10,5 +10,7 @@ routes
   .get("/sub-categories/byid/:id", category.findSubCategoy)
   .get("/categories/byname/:name", category.findCategoy)
   .get("/sub-categories/byname/:name", category.findSubCategoy)
+  .delete("/delete/:id", category.deleteCategory)
+  .delete("/sub/delete/:id", category.deleteSubCategory);
 
 exports.routes = routes;
