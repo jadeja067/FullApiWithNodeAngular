@@ -8,11 +8,10 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  categories:any
-
   constructor(private router: Router, private service: ApiService){
-    this.service.getCategories()
-    this.service.categories.subscribe((data: any) => this.categories = data);
   }
-  
+  signOut(){
+    localStorage.clear()    
+    this.router.navigate(['/sign'])
+  }
 }

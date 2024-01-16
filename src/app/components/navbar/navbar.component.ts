@@ -12,10 +12,7 @@ import type { CollapseInterface } from 'flowbite';
 export class NavbarComponent {
   sideBar:boolean = false
   constructor(private router: Router, private service: ApiService){}
-  signOut(){
-    localStorage.clear()    
-    this.router.navigate(['/sign'])
-  }
+  
   toggle(){
     this.sideBar = !this.sideBar
     this.service.sideBar.next(this.sideBar)

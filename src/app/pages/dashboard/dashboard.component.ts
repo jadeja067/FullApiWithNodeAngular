@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
-import { SubCatListComponent } from '../category/sub-cat-list/sub-cat-list.component';
 import { AddCategoryComponent } from '../category/add-category/add-category.component';
 
 @Component({
@@ -9,7 +8,6 @@ import { AddCategoryComponent } from '../category/add-category/add-category.comp
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-
 export class DashboardComponent implements OnInit, OnDestroy {
   sideBar: boolean = false;
   Addcate: any;
@@ -33,10 +31,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     );
   }
-  
+
   ngOnDestroy(): void {
     this.sideBarSubscription.unsubscribe();
     this.addCategorySubscription.unsubscribe();
   }
-
 }

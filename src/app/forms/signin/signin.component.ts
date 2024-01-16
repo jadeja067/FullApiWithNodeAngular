@@ -95,5 +95,8 @@ export class SigninComponent implements OnInit{
   }
   back() {
     this.isEmail = 0    
+    this.changePasswordForm.reset()
+    this.forgotPasswordForm.reset()
+    this.forgotTimeEmailForm.reset()
   }
 }

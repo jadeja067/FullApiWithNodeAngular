@@ -16,6 +16,10 @@ export class SubCatListComponent implements OnInit{
   }
   ngOnInit(): void {    
   }
+  async removeCategory(id: string){
+    const res = await this.service.deleteSubCategory(id)
+    this.sub_categories = this.service.getSubCategories(this.category)
+  }
   add(){
     this.service.addCate.next(true)
   }

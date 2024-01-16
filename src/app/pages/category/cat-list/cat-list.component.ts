@@ -13,6 +13,10 @@ export class CatListComponent {
     this.service.getCategories()
     this.categories = this.service.categories
   }
+  async removeCategory(id: string){
+    const res = await this.service.deleteCategory(id)
+    this.categories = this.service.categories
+  }
   add(){
     this.service.addCate.next(true)
   }
