@@ -2,16 +2,16 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const users = require("./routes/user");
-const product = require("./routes/product");
-const category = require("./routes/category");
-const jwt = require('jsonwebtoken')
+const users = require("./view/user");
+const product = require("./view/product");
+const category = require("./view/category");
 const app = express();
 
 // MaddleWare
-app.use(express.json());
 app.use(cors());
 dotenv.config();
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // connection to DB
 mongoose
@@ -24,15 +24,6 @@ mongoose
 
 // User routes
 app.use("/user", users.router);
-
-// Jwt token Verification middleware
-app.use(async (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-  jwt.verify(token, process.env.JWT_SECRET_KEY, (err) =>{
-    if(err)res.status(401)
-});
-  next();
-});
 
 // Product routes
 app.use("/product", product.router);

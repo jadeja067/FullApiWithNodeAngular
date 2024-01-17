@@ -1,4 +1,4 @@
-const { productSchema } = require("../schemas/index");
+const { productSchema } = require("../model/index");
 const multer = require("multer");
 const fs = require("fs");
 let fileName = "";
@@ -16,53 +16,41 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-const middleware = upload.single("image");
+exports.middleware = upload.single("image");
 const uploadToCloud = async (path) => {
   const result = await cloudinary.uploader.upload(path);
   return result;
 };
 
-exports.addProducts = async (req, res, next) => {
-  let Add = async () => {
-    try {
-      const result = await cloudinary.uploader.upload(req.file.path);
-      if (result.asset_id) {
-        fs.unlinkSync(req.file.path);
-        req.body.img = result.url;
-        const newProduct = new productSchema(req.body);
-        newProduct.save();
-        res.json(newProduct).status(200);
-      }
-    } catch (e) {
-      res.json(e);
-    }
-  };
-  middleware(req, res, Add);
+exports.addProducts = async (req, res) => {
+  try {
+    const newProduct = new productSchema(req.body);
+    newProduct.save();
+    res.json(newProduct).status(200);
+  } catch (e) {
+    console.log(e);
+    res.json(e);
+  }
 };
 
-exports.updateProductDetails = (req, res, next) => {
+exports.updateProductDetails = async (req, res, next) => {
   const id = req.params.id;
-  const controller = async () => {
-    try {
-      if (req.body.img == "") delete req.body.img;
-      const update = await productSchema.findOneAndUpdate(
-        { _id: id },
-        req.body
-      );
-      res.json(update).status(200);
-    } catch (error) {
-      res.json(error);
-    }
-  };
-  const imageController = async () => {
-    if (req.file) {
-      const result = await uploadToCloud(req.file.path);
-      fs.unlinkSync(req.file.path);
-      req.body.img = result.url;
-      controller();
-    } else controller();
-  };
-  middleware(req, res, imageController);
+  try {
+    if (req.body.img == "") delete req.body.img;
+    const update = await productSchema.findOneAndUpdate({ _id: id }, req.body);
+    res.json(update).status(200);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
+exports.imageUpload = async (req, res, next) => {
+  if (req.file) {
+    const result = await uploadToCloud(req.file.path);
+    fs.unlinkSync(req.file.path);
+    req.body.img = result.url;
+  }
+  next();
 };
 
 exports.deleteProduct = async (req, res) => {
@@ -93,11 +81,11 @@ exports.getProduct = async (req, res) => {
   }
 };
 
-exports.getYourProducts = async(req, res) => {
+exports.getYourProducts = async (req, res) => {
   try {
-    const products = await productSchema.find({user: req.params.uid})
-    res.json(products).status(200)
+    const products = await productSchema.find({ user: req.params.uid });
+    res.json(products).status(200);
   } catch (error) {
-    res.json(error)
+    res.json(error);
   }
-}
+};

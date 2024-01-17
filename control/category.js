@@ -1,4 +1,4 @@
-const { CateSchema, subCateSchema } = require("../schemas/index");
+const { CateSchema, subCateSchema } = require("../model/index");
 
 exports.findCategoy = async (req, res) => {
   try {

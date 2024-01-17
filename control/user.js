@@ -1,4 +1,4 @@
-const { userschema } = require("../schemas/index"),
+const { userschema } = require("../model/index"),
   jwt = require("jsonwebtoken"),
   nodemailer = require("nodemailer"),
   { google } = require("googleapis"),
@@ -47,15 +47,7 @@ const send = () => {
     }
   });
 };
-const expirationTime = Math.floor(Date.now() / 1000) + (60 * 60 * 24);
-const generateToken = (data) =>
-  jwt.sign(
-    {
-      exp: expirationTime,
-      data: data,
-    },
-    process.env.JWT_SECRET_KEY
-  );
+const generateToken = (data) => jwt.sign(data, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
 const encypt = (pass) => cyptoJS.SHA256(pass);
 
 exports.sendMail = async (req, res) => {
