@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit{
   }
   async getCategory(){
     await this.getProducts()
-    this.products.map((ele:any) => {
+    this.products?.map((ele:any) => {
       if(!Object.keys(this.categories).includes(ele.category)) {
         this.categories[ele.category] = []
         this.categories[ele.category].push(ele)

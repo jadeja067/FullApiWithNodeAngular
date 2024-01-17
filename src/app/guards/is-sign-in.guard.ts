@@ -7,6 +7,6 @@ export const isSignInGuard: CanActivateFn = (route, state) => {
     _router = Inject(Router);
   if (auth && user) return true;
   localStorage.clear();
-  _router.navigate(['sign']);
+  _router.navigate(['/']);
   return false;
 };

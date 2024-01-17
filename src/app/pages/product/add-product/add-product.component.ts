@@ -54,7 +54,8 @@ export class AddProductComponent implements OnInit, OnDestroy{
     const payload = new FormData()
     const data = Object.keys(this.addProductForm.value)
     data.forEach((d) => payload.append(d, this.addProductForm.value[d]))
-    const res = await this.service.addProduct(payload)    
+    const res = await this.service.addProduct(payload) 
+       
     if(res){
       this.loading = false
       alert("New Product Is Added.")
