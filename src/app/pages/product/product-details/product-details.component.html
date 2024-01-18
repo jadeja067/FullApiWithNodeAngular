@@ -60,7 +60,7 @@
                 <div class="h-100 w-screen break-words md:pb-0 pb-[5rem]" >
                     <p>{{productDetails.description}}</p>
                 </div>
-                <div class="h-100 flex items-center md:justify-end p-2 gap-4 md:static absolute bottom-0 left-0 right-0">
+                <div class="h-100 flex items-center md:justify-end p-2 gap-4 md:static absolute bottom-0 left-0 right-0 bg-white">
                     <a [routerLink]="['/dashboard','product','update', product_id]" class="rounded-lg bg-blue-700 text-white py-2 px-5">Edit</a>
                     <button class="rounded-lg bg-blue-700 text-white py-2 px-5" (click)="remove(productDetails._id)">Delete</button>
                 </div>
