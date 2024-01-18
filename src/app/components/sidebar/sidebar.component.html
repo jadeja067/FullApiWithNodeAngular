@@ -2,12 +2,11 @@
    <div class="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-100">
       <div class="flex justify-between items-center">
          <a routerLink="product"
-            class="bg-blue-700 md:static fixed bottom-10 right-10 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 rounded-md px-4 py-2 text-white flex-1 items-center justify-center">
+            class="bg-blue-700 md:static fixed bottom-10 right-10 hover:bg-blue-800 dark:bg-blue-600 px-6 py-4 rounded-full md:text-xl text-3xl dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:rounded-md md:px-4 px:py-2 text-white flex-1 items-center justify-center">
             <span class="hidden md:block">ADD NEW PRODUCT</span>
             <span class="md:hidden block">+</span>
          </a>
       </div>
-      
       <ul class="space-y-2 py-4 font-medium">
          <li>
             <a [routerLink]="['/dashboard']"
