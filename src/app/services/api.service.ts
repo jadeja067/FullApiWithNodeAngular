@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ApiService {
-  url: string = 'http://localhost:7000';
+  url: string = 'https://quantumgoods-b8vf.onrender.com';
   sideBar: Subject<any> = new Subject();
   addCate: Subject<any> = new Subject();
   categories: Subject<any> = new Subject();
