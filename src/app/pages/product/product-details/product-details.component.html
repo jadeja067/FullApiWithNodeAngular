@@ -1,8 +1,8 @@
-<div class="h-full box-border border w-full flex justify-center items-start gap-2 py-4"
+<div class="h-full box-border border w-full flex justify-center items-start gap-2 md:py-4 py-0 overflow-y-auto md:pb-0"
     [ngClass]="!productDetails ? 'space-y-8 animate-pulse md:space-y-0 md:space-x-8': ''">
     <div class="flex gap-8 items-center justify-center h-full md:w-[60%] w-screen md:flex-row flex-col rounded-lg md:overflow-hidden">
         <div class="h-full md:w-[50%]">
-            <img src={{productDetails.img}} class="h-full rounded-lg" alt="product image" *ngIf="productDetails">
+            <img src={{productDetails.img}} class="h-full md:rounded-lg" alt="product image" *ngIf="productDetails">
             <svg class="w-full h-full text-gray-200" *ngIf="!productDetails" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -47,20 +47,20 @@
                     <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-[50%]"></div>
                 </div>
             </div>
-            <div class="w-full h-full flex flex-col">
-                <div *ngIf="productDetails" class="h-100">
+            <div class="w-full h-full flex flex-col" *ngIf="productDetails">
+                <div  class="h-100">
                     <h2 class="text-3xl font-bold">{{productDetails.name}}</h2>
                 </div>
-                <div *ngIf="productDetails" class="h-100 py-3">
+                <div class="h-100 py-3">
                     <span class="px-4 py-2 rounded-full bg-gray-300">{{productDetails.category}}</span> : <span class="px-4 py-2 rounded-full bg-gray-300">{{productDetails.subCategory}}</span>
                 </div>
-                <div *ngIf="productDetails" class="h-[80%] overflow-y-auto" >
-                    <p>{{productDetails.description}}</p>
-                </div>
-                <div *ngIf="productDetails" class="h-100 overflow-y-auto" >
+                <div class="h-100" >
                     <p class="text-2xl font-semibold"><span>Price : </span>${{productDetails.price}}</p>
                 </div>
-                <div class="h-100 flex items-center justify-end gap-4">
+                <div class="h-100 w-screen break-words md:pb-0 pb-[5rem]" >
+                    <p>{{productDetails.description}}</p>
+                </div>
+                <div class="h-100 flex items-center md:justify-end p-2 gap-4 md:static absolute bottom-0 left-0 right-0">
                     <a [routerLink]="['/dashboard','product','update', product_id]" class="rounded-lg bg-blue-700 text-white py-2 px-5">Edit</a>
                     <button class="rounded-lg bg-blue-700 text-white py-2 px-5" (click)="remove(productDetails._id)">Delete</button>
                 </div>
