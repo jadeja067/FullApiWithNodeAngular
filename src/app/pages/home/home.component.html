@@ -1,5 +1,5 @@
 <div>
-    <div *ngFor="let cat of cates" class="w-full h-full">
+    <div *ngFor="let cat of cates" class="w-full h-full p-2">
         <p class="py-3 text-3xl font-bold">{{cat}}</p>
         <div class="w-100 p-2 h-100 flex gap-2 overflow-x-scroll" *ngIf="categories[cat]">
             <a [routerLink]="['/dashboard','product', product._id]" *ngFor="let product of categories[cat]"
