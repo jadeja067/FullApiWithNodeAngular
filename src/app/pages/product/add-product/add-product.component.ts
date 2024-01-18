@@ -12,7 +12,7 @@ export class AddProductComponent implements OnInit, OnDestroy{
   categories: any
   sub_categories: any
   imageSrc: string =
-    'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220';
+    'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png';
   loading: any = false
   categoriesSubscription: any
   valuesChangesSubscription: any
@@ -60,7 +60,7 @@ export class AddProductComponent implements OnInit, OnDestroy{
       this.loading = false
       alert("New Product Is Added.")
       this.addProductForm.reset()
-      this.imageSrc = 'https://tse3.mm.bing.net/th?id=OIP.4-LoTi4UsTIuYSqqIQ_PKwHaJ3&pid=Api&P=0&h=220'
+      this.imageSrc = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.gaithersburgdental.com%2Fhome%2Forionthemes-placeholder-image%2F&psig=AOvVaw2GVPW2KEtgQlyhScp7wAOZ&ust=1705663401581000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCLj2lsDp5oMDFQAAAAAdAAAAABAD'
     } 
   }
   open(){
